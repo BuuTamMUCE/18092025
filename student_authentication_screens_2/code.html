@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>EduPath - Sign Up Wizard</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect">
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800" onload="this.rel='stylesheet'" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "content-light": "#1f2937",
+              "content-dark": "#e5e7eb",
+              "subtle-light": "#6b7280",
+              "subtle-dark": "#9ca3af",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1f2937",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151"
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+    <style>
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-content-light dark:text-content-dark">
+    <div class="flex flex-col min-h-screen">
+        <header class="bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-border-light dark:border-border-dark">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <a class="flex items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark" href="#">
+                            <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                            <span class="hidden sm:inline">EduPath</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center gap-8">
+                        <a class="text-sm font-medium text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors" href="#">Home</a>
+                        <a class="text-sm font-medium text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors" href="#">Courses</a>
+                        <a class="text-sm font-medium text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors" href="#">Instructors</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a class="text-sm font-medium text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors" href="#">Log in</a>
+                        <a class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-full hover:bg-primary/90 transition-colors" href="#">
+                            Sign Up
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <div class="w-full max-w-md space-y-8">
+                <div class="bg-surface-light dark:bg-surface-dark p-8 rounded-lg shadow-lg">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-extrabold text-content-light dark:text-content-dark">Create your account</h2>
+                        <div class="flex justify-center mt-4">
+                            <div class="relative w-full max-w-xs">
+                                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                    <div class="w-full border-t border-primary"></div>
+                                </div>
+                                <div class="relative flex justify-between">
+                                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white ring-2 ring-primary">
+                                        <span class="text-xs font-bold">1</span>
+                                    </div>
+                                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-subtle-light dark:bg-subtle-dark text-white ring-2 ring-subtle-light dark:ring-subtle-dark">
+                                        <span class="text-xs font-bold">2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-subtle-light dark:text-subtle-dark">
+                            Start your learning journey with us.
+                        </p>
+                    </div>
+
+                    <form id="signup-form" action="#" class="space-y-6" method="POST">
+
+                        <!-- Step 1: Personal Info -->
+                        <div id="step-1" class="step active">
+                            <h3 class="text-xl font-semibold text-content-light dark:text-content-dark mb-4">Personal Information</h3>
+                            <div class="rounded-md space-y-4">
+                                <div>
+                                    <label class="sr-only" for="full-name">Full name</label>
+                                    <input class="relative block w-full px-3 py-3 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark placeholder-subtle-light dark:placeholder-subtle-dark text-content-light dark:text-content-dark rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" id="full-name" name="name" placeholder="Full name" required="" type="text"/>
+                                </div>
+                                <div>
+                                    <label class="sr-only" for="email-address">Email address</label>
+                                    <input autocomplete="email" class="relative block w-full px-3 py-3 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark placeholder-subtle-light dark:placeholder-subtle-dark text-content-light dark:text-content-dark rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" id="email-address" name="email" placeholder="Email address" required="" type="email"/>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <button type="button" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 next-step" data-step="2">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Account Details -->
+                        <div id="step-2" class="step">
+                            <h3 class="text-xl font-semibold text-content-light dark:text-content-dark mb-4">Account Details</h3>
+                            <div class="rounded-md space-y-4">
+                                <div>
+                                    <label class="sr-only" for="password">Password</label>
+                                    <input autocomplete="new-password" class="relative block w-full px-3 py-3 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark placeholder-subtle-light dark:placeholder-subtle-dark text-content-light dark:text-content-dark rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" id="password" name="password" placeholder="Password" required="" type="password"/>
+                                </div>
+                                <div>
+                                    <label class="sr-only" for="confirm-password">Confirm password</label>
+                                    <input autocomplete="new-password" class="relative block w-full px-3 py-3 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark placeholder-subtle-light dark:placeholder-subtle-dark text-content-light dark:text-content-dark rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" id="confirm-password" name="confirm-password" placeholder="Confirm password" required="" type="password"/>
+                                </div>
+                            </div>
+                            <div class="mt-6 flex justify-between">
+                                <button type="button" class="group relative flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-primary bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 prev-step" data-step="1">
+                                    Back
+                                </button>
+                                <button type="submit" class="group relative flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50">
+                                    Sign up
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                            Already have an account?
+                            <a class="font-medium text-primary hover:text-primary/90" href="#">
+                                Log in
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+            const steps = document.querySelectorAll('.step');
+            const progressCircles = document.querySelectorAll('.justify-between > div'); // Target the circles directly
+            const progressBar = document.querySelector('.absolute.inset-0'); // Target the progress bar
+
+            function updateProgress(currentStepIndex) {
+                progressCircles.forEach((circle, index) => {
+                    const stepNum = index + 1;
+                    if (stepNum <= currentStepIndex) {
+                        circle.classList.remove('bg-subtle-light', 'dark:bg-subtle-dark', 'ring-subtle-light', 'dark:ring-subtle-dark');
+                        circle.classList.add('bg-primary', 'ring-primary');
+                    } else {
+                        circle.classList.remove('bg-primary', 'ring-primary');
+                        circle.classList.add('bg-subtle-light', 'dark:bg-subtle-dark', 'ring-subtle-light', 'dark:ring-subtle-dark');
+                    }
+                });
+
+                // Update the progress bar width based on the current step
+                const totalSteps = steps.length;
+                const progressPercent = ((currentStepIndex - 1) / (totalSteps - 1)) * 100;
+                if (progressBar) {
+                    progressBar.style.width = `${progressPercent}%`;
+                }
+            }
+
+
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStepId = this.closest('.step').id;
+                    const nextStepId = this.getAttribute('data-step');
+                    const currentStep = document.getElementById(currentStepId);
+                    const nextStep = document.getElementById('step-' + nextStepId);
+
+                    if (currentStep && nextStep) {
+                        currentStep.classList.remove('active');
+                        nextStep.classList.add('active');
+
+                        const currentStepIndex = parseInt(currentStepId.split('-')[1]);
+                        updateProgress(parseInt(nextStepId));
+                    }
+                });
+            });
+
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStepId = this.closest('.step').id;
+                    const prevStepId = this.getAttribute('data-step');
+                    const currentStep = document.getElementById(currentStepId);
+                    const prevStep = document.getElementById('step-' + prevStepId);
+
+                    if (currentStep && prevStep) {
+                        currentStep.classList.remove('active');
+                        prevStep.classList.add('active');
+
+                        const currentStepIndex = parseInt(currentStepId.split('-')[1]);
+                        updateProgress(parseInt(prevStepId));
+                    }
+                });
+            });
+
+            // Initialize progress for the first step
+            updateProgress(1);
+        });
+    </script>
+</body>
+</html>

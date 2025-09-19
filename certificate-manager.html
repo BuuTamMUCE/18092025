@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Manager - EduPlatform</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/blockchain-manager.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1b2734",
+                        "subtle-light": "#617589",
+                        "subtle-dark": "#a0b3c6",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark shadow-sm">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <div class="text-primary size-6">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-bold">Certificate Manager</h1>
+                        <div id="web3-status" class="px-3 py-1 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400 rounded-full text-sm">
+                            <span class="w-2 h-2 bg-red-500 rounded-full inline-block mr-2"></span>
+                            Not Connected
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+                        <a href="index.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Web3 Connection -->
+            <div class="mb-6">
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                    <h2 class="text-lg font-semibold mb-4">Blockchain Connection</h2>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-subtle-light dark:text-subtle-dark">Connect to Web3 to manage certificates</p>
+                            <p id="network-info" class="text-sm text-subtle-light dark:text-subtle-dark mt-1">No network selected</p>
+                        </div>
+                        <button id="connect-web3-btn" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            Connect Wallet
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Actions -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Mint Certificate -->
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                    <h3 class="text-lg font-semibold mb-4">Mint New Certificate</h3>
+                    <form id="mint-certificate-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Student Name</label>
+                            <input type="text" id="student-name" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Student ID</label>
+                            <input type="text" id="student-id" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Course Name</label>
+                            <input type="text" id="course-name" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Course ID</label>
+                            <input type="text" id="course-id" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Grade</label>
+                            <select id="grade" required
+                                    class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                <option value="">Select Grade</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="B-">B-</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="C-">C-</option>
+                                <option value="D">D</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Issuer Name</label>
+                            <input type="text" id="issuer-name" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <button type="submit" class="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            Mint Certificate
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Verify Certificate -->
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                    <h3 class="text-lg font-semibold mb-4">Verify Certificate</h3>
+                    <form id="verify-certificate-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Certificate ID</label>
+                            <input type="text" id="certificate-id" required
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                            Verify Certificate
+                        </button>
+                    </form>
+                    
+                    <!-- Verification Result -->
+                    <div id="verification-result" class="mt-4 hidden">
+                        <div class="p-4 rounded-lg border">
+                            <h4 class="font-semibold mb-2">Verification Result</h4>
+                            <div id="verification-details" class="text-sm space-y-1">
+                                <!-- Verification details will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Certificates -->
+            <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">My Certificates</h3>
+                    <button id="refresh-certificates-btn" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                        Refresh
+                    </button>
+                </div>
+                <div id="certificates-list" class="space-y-4">
+                    <div class="text-center text-subtle-light dark:text-subtle-dark py-8">
+                        <p>No certificates found. Connect your wallet to view certificates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Preview Modal -->
+            <div id="certificate-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Certificate Preview</h3>
+                        <button id="close-certificate-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="certificate-preview" class="text-center">
+                        <!-- Certificate preview will be displayed here -->
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <button id="download-certificate-btn" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            Download
+                        </button>
+                        <button id="share-certificate-btn" class="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Certificate Manager Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const blockchainManager = new BlockchainManager();
+            let userCertificates = [];
+
+            // Initialize theme toggle
+            initializeThemeToggle();
+            
+            // Initialize event listeners
+            initializeEventListeners();
+
+            function initializeThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                html.classList.toggle('dark', currentTheme === 'light');
+
+                themeToggle.addEventListener('click', () => {
+                    html.classList.toggle('dark');
+                    const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            function initializeEventListeners() {
+                // Web3 connection
+                document.getElementById('connect-web3-btn').addEventListener('click', connectWeb3);
+
+                // Certificate forms
+                document.getElementById('mint-certificate-form').addEventListener('submit', mintCertificate);
+                document.getElementById('verify-certificate-form').addEventListener('submit', verifyCertificate);
+
+                // Certificate management
+                document.getElementById('refresh-certificates-btn').addEventListener('click', loadUserCertificates);
+
+                // Modal controls
+                document.getElementById('close-certificate-modal').addEventListener('click', closeCertificateModal);
+                document.getElementById('download-certificate-btn').addEventListener('click', downloadCertificate);
+                document.getElementById('share-certificate-btn').addEventListener('click', shareCertificate);
+            }
+
+            async function connectWeb3() {
+                try {
+                    if (!blockchainManager.isWeb3Available()) {
+                        alert('Please install MetaMask to use this feature.');
+                        return;
+                    }
+
+                    const account = await blockchainManager.connect();
+                    updateWeb3Status('connected', account);
+                    await loadUserCertificates();
+                } catch (error) {
+                    console.error('Failed to connect to Web3:', error);
+                    alert('Failed to connect to Web3. Please try again.');
+                }
+            }
+
+            function updateWeb3Status(status, account = null) {
+                const statusElement = document.getElementById('web3-status');
+                const networkInfo = document.getElementById('network-info');
+                
+                if (status === 'connected') {
+                    statusElement.className = 'px-3 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 rounded-full text-sm';
+                    statusElement.innerHTML = '<span class="w-2 h-2 bg-green-500 rounded-full inline-block mr-2"></span>Connected';
+                    networkInfo.textContent = `Account: ${account?.slice(0, 6)}...${account?.slice(-4)} | Network: ${blockchainManager.getCurrentNetwork()}`;
+                } else {
+                    statusElement.className = 'px-3 py-1 bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400 rounded-full text-sm';
+                    statusElement.innerHTML = '<span class="w-2 h-2 bg-red-500 rounded-full inline-block mr-2"></span>Not Connected';
+                    networkInfo.textContent = 'No network selected';
+                }
+            }
+
+            async function mintCertificate(event) {
+                event.preventDefault();
+                
+                try {
+                    const formData = new FormData(event.target);
+                    const certificateData = {
+                        studentName: document.getElementById('student-name').value,
+                        studentId: document.getElementById('student-id').value,
+                        courseName: document.getElementById('course-name').value,
+                        courseId: document.getElementById('course-id').value,
+                        grade: document.getElementById('grade').value,
+                        issuerName: document.getElementById('issuer-name').value,
+                        completionDate: new Date().toISOString().split('T')[0]
+                    };
+
+                    // Generate certificate image
+                    const certificateImage = await blockchainManager.generateCertificateImage(certificateData);
+                    certificateData.certificateImage = certificateImage;
+
+                    // Create metadata
+                    const metadataURI = await blockchainManager.createCertificateMetadata(certificateData);
+                    certificateData.metadataURI = metadataURI;
+
+                    // Mint certificate
+                    const txHash = await blockchainManager.mintCertificate(certificateData);
+                    
+                    alert(`Certificate minted successfully! Transaction: ${txHash}`);
+                    
+                    // Reset form
+                    event.target.reset();
+                    
+                    // Reload certificates
+                    await loadUserCertificates();
+                } catch (error) {
+                    console.error('Failed to mint certificate:', error);
+                    alert('Failed to mint certificate. Please try again.');
+                }
+            }
+
+            async function verifyCertificate(event) {
+                event.preventDefault();
+                
+                try {
+                    const certificateId = document.getElementById('certificate-id').value;
+                    const result = await blockchainManager.verifyCertificate(certificateId);
+                    
+                    const resultElement = document.getElementById('verification-result');
+                    const detailsElement = document.getElementById('verification-details');
+                    
+                    if (result.isValid) {
+                        detailsElement.innerHTML = `
+                            <div class="text-green-600 dark:text-green-400 font-semibold">✓ Valid Certificate</div>
+                            <div><strong>Student ID:</strong> ${result.studentId}</div>
+                            <div><strong>Course:</strong> ${result.courseName}</div>
+                            <div><strong>Grade:</strong> ${result.grade}</div>
+                            <div><strong>Completion Date:</strong> ${result.completionDate}</div>
+                            <div><strong>Issuer:</strong> ${result.issuerName}</div>
+                        `;
+                        resultElement.className = 'mt-4 p-4 rounded-lg border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20';
+                    } else {
+                        detailsElement.innerHTML = `
+                            <div class="text-red-600 dark:text-red-400 font-semibold">✗ Invalid Certificate</div>
+                            <div>This certificate ID does not exist or has been revoked.</div>
+                        `;
+                        resultElement.className = 'mt-4 p-4 rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20';
+                    }
+                    
+                    resultElement.classList.remove('hidden');
+                } catch (error) {
+                    console.error('Failed to verify certificate:', error);
+                    alert('Failed to verify certificate. Please try again.');
+                }
+            }
+
+            async function loadUserCertificates() {
+                try {
+                    if (!blockchainManager.isConnected) {
+                        return;
+                    }
+
+                    userCertificates = await blockchainManager.getUserCertificates(blockchainManager.account);
+                    displayCertificates(userCertificates);
+                } catch (error) {
+                    console.error('Failed to load certificates:', error);
+                }
+            }
+
+            function displayCertificates(certificates) {
+                const certificatesList = document.getElementById('certificates-list');
+                
+                if (certificates.length === 0) {
+                    certificatesList.innerHTML = `
+                        <div class="text-center text-subtle-light dark:text-subtle-dark py-8">
+                            <p>No certificates found.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                certificatesList.innerHTML = certificates.map(cert => `
+                    <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                        <div>
+                            <h4 class="font-semibold">${cert.courseName}</h4>
+                            <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                                Grade: ${cert.grade} | Completed: ${cert.completionDate}
+                            </p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="viewCertificate('${cert.id}')" class="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600 transition-colors">
+                                View
+                            </button>
+                            <button onclick="shareCertificate('${cert.id}')" class="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600 transition-colors">
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function viewCertificate(certificateId) {
+                const certificate = userCertificates.find(cert => cert.id === certificateId);
+                if (certificate) {
+                    showCertificateModal(certificate);
+                }
+            }
+
+            function showCertificateModal(certificate) {
+                const modal = document.getElementById('certificate-modal');
+                const preview = document.getElementById('certificate-preview');
+                
+                preview.innerHTML = `
+                    <div class="border-2 border-primary p-8 bg-white dark:bg-gray-800">
+                        <h2 class="text-2xl font-bold text-primary mb-4">CERTIFICATE OF COMPLETION</h2>
+                        <h3 class="text-xl font-semibold mb-6">${certificate.courseName}</h3>
+                        <p class="mb-4">This is to certify that</p>
+                        <p class="text-xl font-bold mb-4">Student Name</p>
+                        <p class="mb-4">has successfully completed the course</p>
+                        <p class="mb-4">with a grade of <strong>${certificate.grade}</strong></p>
+                        <p class="mb-4">Completed on ${certificate.completionDate}</p>
+                        <p class="mb-4">Issued by ${certificate.issuerName}</p>
+                        <div class="mt-8 text-sm text-gray-500">
+                            Certificate ID: ${certificate.id}
+                        </div>
+                    </div>
+                `;
+                
+                modal.classList.remove('hidden');
+            }
+
+            function closeCertificateModal() {
+                document.getElementById('certificate-modal').classList.add('hidden');
+            }
+
+            function downloadCertificate() {
+                // Implement certificate download
+                console.log('Downloading certificate...');
+            }
+
+            function shareCertificate(certificateId) {
+                // Implement certificate sharing
+                console.log('Sharing certificate:', certificateId);
+            }
+
+            // Make functions globally available
+            window.viewCertificate = viewCertificate;
+            window.shareCertificate = shareCertificate;
+        });
+    </script>
+</body>
+</html>
+

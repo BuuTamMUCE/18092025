@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter%3Awght%40400%3B500%3B700%3B800&family=Poppins%3Awght%40400%3B500%3B600%3B700&display=swap" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFE66D",
+              "background-light": "#F0F2F5",
+              "background-dark": "#1A202C",
+              "card-dark": "#2D3748",
+            },
+            fontFamily: {
+              display: ["Poppins", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>LMS Gamified Admin</title>
+</head>
+<body class="font-body">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light text-stone-900 dark:bg-background-dark dark:text-white">
+<div class="flex h-full w-full flex-grow">
+<aside class="flex w-64 flex-col bg-white p-6 shadow-lg dark:bg-card-dark">
+<div class="flex items-center gap-3">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary p-3">
+<span class="material-symbols-outlined text-white"> trophy </span>
+</div>
+<h1 class="text-xl font-bold text-stone-900 dark:text-white">Quiz Master</h1>
+</div>
+<nav class="mt-10 flex flex-col gap-3">
+<a class="flex items-center gap-4 rounded-lg px-3 py-3 text-stone-600 transition-colors hover:bg-primary/10 hover:text-primary dark:text-stone-400 dark:hover:bg-primary/20 dark:hover:text-secondary" href="#">
+<span class="material-symbols-outlined"> leaderboard </span>
+<span class="font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 rounded-lg px-3 py-3 text-stone-600 transition-colors hover:bg-primary/10 hover:text-primary dark:text-stone-400 dark:hover:bg-primary/20 dark:hover:text-secondary" href="#">
+<span class="material-symbols-outlined"> book_5 </span>
+<span class="font-semibold">Courses</span>
+</a>
+<a class="flex items-center gap-4 rounded-lg bg-primary/10 px-3 py-3 font-semibold text-primary transition-colors dark:bg-primary/20 dark:text-secondary" href="#">
+<span class="material-symbols-outlined"> grade </span>
+<span class="font-semibold">Quizzes</span>
+</a>
+<a class="flex items-center gap-4 rounded-lg px-3 py-3 text-stone-600 transition-colors hover:bg-primary/10 hover:text-primary dark:text-stone-400 dark:hover:bg-primary/20 dark:hover:text-secondary" href="#">
+<span class="material-symbols-outlined"> group </span>
+<span class="font-semibold">Users</span>
+</a>
+<a class="flex items-center gap-4 rounded-lg px-3 py-3 text-stone-600 transition-colors hover:bg-primary/10 hover:text-primary dark:text-stone-400 dark:hover:bg-primary/20 dark:hover:text-secondary" href="#">
+<span class="material-symbols-outlined"> settings </span>
+<span class="font-semibold">Settings</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col items-center gap-4 pt-8">
+<div class="w-full rounded-xl bg-gradient-to-br from-accent/20 to-secondary/20 p-4 text-center">
+<h4 class="text-lg font-bold text-primary">Your Progress</h4>
+<div class="mt-2 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-secondary"> star </span>
+<span class="text-sm font-medium text-stone-700 dark:text-stone-300">Level 5</span>
+</div>
+<div class="relative mt-3 h-2 w-full rounded-full bg-stone-300 dark:bg-stone-700">
+<div class="absolute h-2 rounded-full bg-gradient-to-r from-secondary to-primary" style="width: 75%;"></div>
+</div>
+<p class="mt-2 text-xs text-stone-500 dark:text-stone-400">75% complete</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-auto p-8">
+<div class="flex items-center justify-between">
+<h2 class="text-4xl font-bold text-stone-900 dark:text-white">Quiz Arena</h2>
+<button class="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-primary to-secondary px-6 py-3 text-lg font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-lg">
+<span class="material-symbols-outlined"> add_circle </span>
+<span>Create Quiz</span>
+</button>
+</div>
+<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+<div class="rounded-xl border border-stone-200 bg-white p-6 shadow-lg dark:border-stone-800 dark:bg-card-dark">
+<div class="mb-6 flex items-center justify-between">
+<h3 class="text-2xl font-bold text-stone-900 dark:text-white">Active Quizzes</h3>
+<button class="text-secondary hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+<div class="rounded-xl bg-primary/5 p-4 shadow">
+<h4 class="text-lg font-bold text-primary">Quiz 1: Intro to Programming</h4>
+<p class="mt-1 text-sm text-stone-600 dark:text-stone-300">10 Questions | 30 Mins</p>
+<div class="mt-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary"> trophy </span>
+<span class="text-sm font-medium text-stone-700 dark:text-stone-300">Top Score: 95%</span>
+</div>
+<div class="mt-3 flex justify-between">
+<span class="text-xs font-medium text-green-600 dark:text-green-400">Active</span>
+<button class="text-primary hover:underline">Details</button>
+</div>
+</div>
+<div class="rounded-xl bg-accent/5 p-4 shadow">
+<h4 class="text-lg font-bold text-primary">Quiz 4: Operating Systems</h4>
+<p class="mt-1 text-sm text-stone-600 dark:text-stone-300">18 Questions | 60 Mins</p>
+<div class="mt-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary"> workspace_premium </span>
+<span class="text-sm font-medium text-stone-700 dark:text-stone-300">Top Score: 98%</span>
+</div>
+<div class="mt-3 flex justify-between">
+<span class="text-xs font-medium text-green-600 dark:text-green-400">Active</span>
+<button class="text-primary hover:underline">Details</button>
+</div>
+</div>
+<div class="rounded-xl bg-secondary/5 p-4 shadow">
+<h4 class="text-lg font-bold text-primary">Quiz 3: Database Management</h4>
+<p class="mt-1 text-sm text-stone-600 dark:text-stone-300">12 Questions | 40 Mins</p>
+<div class="mt-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary"> trophy </span>
+<span class="text-sm font-medium text-stone-700 dark:text-stone-300">Top Score: 98%</span>
+</div>
+<div class="mt-3 flex justify-between">
+<span class="text-xs font-medium text-green-600 dark:text-green-400">Active</span>
+<button class="text-primary hover:underline">Details</button>
+</div>
+</div>
+<div class="rounded-xl bg-gray-100 p-4 dark:bg-card-dark/50">
+<h4 class="text-lg font-bold text-stone-700 dark:text-white">Quiz 2: Data Structures</h4>
+<p class="mt-1 text-sm text-stone-500 dark:text-stone-400">15 Questions | 45 Mins</p>
+<div class="mt-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-500"> schedule </span>
+<span class="text-sm font-medium text-stone-600 dark:text-stone-300">Inactive</span>
+</div>
+<div class="mt-3 flex justify-between">
+<span class="text-xs font-medium text-stone-500 dark:text-stone-400">Inactive</span>
+<button class="text-primary hover:underline">Details</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 lg:col-span-1">
+<div class="flex flex-col gap-4 rounded-xl border border-stone-200 bg-white p-6 shadow-lg dark:border-stone-800 dark:bg-card-dark">
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-bold text-stone-900 dark:text-white">Question Vault</h3>
+<button class="flex items-center justify-center gap-2 rounded-lg border border-secondary bg-secondary/10 px-4 py-2 text-sm font-bold text-secondary transition-colors hover:bg-secondary/20 dark:bg-secondary/20 dark:hover:bg-secondary/30">
+<span class="material-symbols-outlined"> library_add </span>
+<span>Add Question</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b border-stone-200 dark:border-stone-800">
+<tr>
+<th class="px-6 py-4 text-sm font-medium text-stone-600 dark:text-stone-400">Question</th>
+<th class="px-6 py-4 text-sm font-medium text-stone-600 dark:text-stone-400">Options</th>
+<th class="px-6 py-4 text-sm font-medium text-stone-600 dark:text-stone-400">Correct Answer</th>
+<th class="px-6 py-4 text-sm font-medium text-stone-600 dark:text-stone-400">Quiz Association</th>
+<th class="px-6 py-4 text-sm font-medium text-stone-600 dark:text-stone-400">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-stone-200 dark:border-stone-800">
+<td class="px-6 py-4 font-medium text-stone-900 dark:text-white">What is the capital of France?</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">A. London, B. Paris, C. Berlin, D. Rome</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">Paris</td>
+<td class="px-6 py-4 text-primary">Quiz 1</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="text-secondary hover:underline">Edit</button>
+<button class="text-red-500 hover:underline">Delete</button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-stone-200 dark:border-stone-800">
+<td class="px-6 py-4 font-medium text-stone-900 dark:text-white">Which language is for web dev?</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">A. Java, B. Python, C. JavaScript, D. C++</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">JavaScript</td>
+<td class="px-6 py-4 text-primary">Quiz 1</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="text-secondary hover:underline">Edit</button>
+<button class="text-red-500 hover:underline">Delete</button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-stone-200 dark:border-stone-800">
+<td class="px-6 py-4 font-medium text-stone-900 dark:text-white">What does CPU stand for?</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">A. Central Processing Unit, B. Computer Personal Unit</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">Central Processing Unit</td>
+<td class="px-6 py-4 text-primary">Quiz 1</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="text-secondary hover:underline">Edit</button>
+<button class="text-red-500 hover:underline">Delete</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-stone-900 dark:text-white">What is OOP?</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">A. Object Oriented Programming, B. Online Operating Program</td>
+<td class="px-6 py-4 text-stone-600 dark:text-stone-400">Object Oriented Programming</td>
+<td class="px-6 py-4 text-primary">Quiz 2</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="text-secondary hover:underline">Edit</button>
+<button class="text-red-500 hover:underline">Delete</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+<div class="col-span-1 rounded-xl border border-stone-200 bg-white p-6 shadow-lg dark:border-stone-800 dark:bg-card-dark">
+<h3 class="mb-4 text-2xl font-bold text-stone-900 dark:text-white">Leaderboard</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between rounded-lg bg-primary/5 p-3 shadow">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary"> emoji_events </span>
+<span class="font-medium text-stone-900 dark:text-white">Alice Smith</span>
+</div>
+<span class="font-semibold text-secondary">950 Points</span>
+</div>
+<div class="flex items-center justify-between rounded-lg bg-secondary/5 p-3 shadow">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary"> workspace_premium </span>
+<span class="font-medium text-stone-900 dark:text-white">Bob Johnson</span>
+</div>
+<span class="font-semibold text-primary">920 Points</span>
+</div>
+<div class="flex items-center justify-between rounded-lg bg-accent/5 p-3 shadow">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent"> star </span>
+<span class="font-medium text-stone-900 dark:text-white">Charlie Brown</span>
+</div>
+<span class="font-semibold text-secondary">880 Points</span>
+</div>
+<button class="mt-4 w-full rounded-lg bg-gradient-to-r from-primary to-secondary py-2 text-lg font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-lg">View Full Leaderboard</button>
+</div>
+</div>
+<div class="col-span-1 rounded-xl border border-stone-200 bg-white p-6 shadow-lg dark:border-stone-800 dark:bg-card-dark">
+<h3 class="mb-4 text-2xl font-bold text-stone-900 dark:text-white">Achievements</h3>
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4">
+<div class="flex flex-col items-center justify-center rounded-xl bg-secondary/10 p-3 text-center shadow">
+<span class="material-symbols-outlined text-4xl text-secondary"> grade </span>
+<h4 class="mt-2 text-base font-bold text-secondary">Quiz Whiz</h4>
+<p class="text-xs text-stone-600 dark:text-stone-300">Completed 10 Quizzes</p>
+</div>
+<div class="flex flex-col items-center justify-center rounded-xl bg-primary/10 p-3 text-center shadow">
+<span class="material-symbols-outlined text-4xl text-primary"> check_circle </span>
+<h4 class="mt-2 text-base font-bold text-primary">Perfect Score</h4>
+<p class="text-xs text-stone-600 dark:text-stone-300">Achieved 100%</p>
+</div>
+<div class="flex flex-col items-center justify-center rounded-xl bg-accent/10 p-3 text-center shadow">
+<span class="material-symbols-outlined text-4xl text-accent"> lightbulb </span>
+<h4 class="mt-2 text-base font-bold text-accent">Quick Learner</h4>
+<p class="text-xs text-stone-600 dark:text-stone-300">First Attempt Success</p>
+</div>
+<div class="flex flex-col items-center justify-center rounded-xl bg-gray-200 p-3 text-center shadow dark:bg-card-dark/50">
+<span class="material-symbols-outlined text-4xl text-stone-500"> unlocked </span>
+<h4 class="mt-2 text-base font-bold text-stone-700 dark:text-white">Mastermind</h4>
+<p class="text-xs text-stone-500 dark:text-stone-400">Unlock Next Level</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Classroom - EduPlatform</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="js/config.js"></script>
+    <script src="js/webrtc-manager.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1b2734",
+                        "subtle-light": "#617589",
+                        "subtle-dark": "#a0b3c6",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark shadow-sm">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <div class="text-primary size-6">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-bold">Live Classroom</h1>
+                        <div id="room-status" class="px-3 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400 rounded-full text-sm">
+                            <span class="w-2 h-2 bg-green-500 rounded-full inline-block mr-2"></span>
+                            Connected
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+                        <a href="index.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Room Controls -->
+            <div class="mb-6">
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div>
+                                <h2 class="text-lg font-semibold">Room: <span id="current-room-id" class="text-primary">Not connected</span></h2>
+                                <p class="text-sm text-subtle-light dark:text-subtle-dark">Share this room ID with others to join</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="create-room-btn" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                                Create Room
+                            </button>
+                            <button id="join-room-btn" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                Join Room
+                            </button>
+                            <button id="leave-room-btn" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors hidden">
+                                Leave Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <!-- Main Video Area -->
+                <div class="lg:col-span-2">
+                    <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+                        <div id="main-video-container" class="aspect-video bg-gray-800 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                <p class="text-lg">No video stream</p>
+                                <p class="text-sm opacity-75">Start your camera to begin</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-gray-800">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                                    <span class="text-white font-medium">Live</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button id="mute-audio-btn" class="p-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                                        </svg>
+                                    </button>
+                                    <button id="mute-video-btn" class="p-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                    <button id="screen-share-btn" class="p-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                    <button id="record-btn" class="p-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Participants Sidebar -->
+                <div class="space-y-4">
+                    <div class="bg-card-light dark:bg-card-dark p-4 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                        <h3 class="font-semibold mb-3">Participants (<span id="participant-count">0</span>)</h3>
+                        <div id="participants-list" class="space-y-2">
+                            <div class="text-center text-subtle-light dark:text-subtle-dark py-4">
+                                <p>No participants yet</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat -->
+                    <div class="bg-card-light dark:bg-card-dark p-4 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                        <h3 class="font-semibold mb-3">Live Chat</h3>
+                        <div id="chat-messages" class="h-48 overflow-y-auto mb-3 space-y-2">
+                            <div class="text-center text-subtle-light dark:text-subtle-dark py-4">
+                                <p>No messages yet</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <input id="chat-input" type="text" placeholder="Type a message..." 
+                                   class="flex-1 px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            <button id="send-chat-btn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Join Room Modal -->
+            <div id="join-room-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
+                    <h3 class="text-lg font-semibold mb-4">Join Room</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Room ID</label>
+                            <input id="room-id-input" type="text" placeholder="Enter room ID" 
+                                   class="w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="confirm-join-btn" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                Join
+                            </button>
+                            <button id="cancel-join-btn" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Live Classroom Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const webrtcManager = new WebRTCManager();
+            let isAudioMuted = false;
+            let isVideoMuted = false;
+            let isRecording = false;
+
+            // Initialize theme toggle
+            initializeThemeToggle();
+            
+            // Initialize event listeners
+            initializeEventListeners();
+
+            // Initialize WebRTC Manager
+            webrtcManager.onRemoteStream = (userId, stream) => {
+                addParticipant(userId, stream);
+            };
+
+            function initializeThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                html.classList.toggle('dark', currentTheme === 'light');
+
+                themeToggle.addEventListener('click', () => {
+                    html.classList.toggle('dark');
+                    const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            function initializeEventListeners() {
+                // Room controls
+                document.getElementById('create-room-btn').addEventListener('click', createRoom);
+                document.getElementById('join-room-btn').addEventListener('click', showJoinModal);
+                document.getElementById('leave-room-btn').addEventListener('click', leaveRoom);
+                document.getElementById('confirm-join-btn').addEventListener('click', joinRoom);
+                document.getElementById('cancel-join-btn').addEventListener('click', hideJoinModal);
+
+                // Media controls
+                document.getElementById('mute-audio-btn').addEventListener('click', toggleAudio);
+                document.getElementById('mute-video-btn').addEventListener('click', toggleVideo);
+                document.getElementById('screen-share-btn').addEventListener('click', toggleScreenShare);
+                document.getElementById('record-btn').addEventListener('click', toggleRecording);
+
+                // Chat
+                document.getElementById('send-chat-btn').addEventListener('click', sendMessage);
+                document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+            }
+
+            async function createRoom() {
+                try {
+                    const roomId = await webrtcManager.createRoom();
+                    document.getElementById('current-room-id').textContent = roomId;
+                    document.getElementById('create-room-btn').classList.add('hidden');
+                    document.getElementById('join-room-btn').classList.add('hidden');
+                    document.getElementById('leave-room-btn').classList.remove('hidden');
+                    
+                    // Show local video
+                    showLocalVideo();
+                } catch (error) {
+                    console.error('Failed to create room:', error);
+                    alert('Failed to create room. Please check your camera permissions.');
+                }
+            }
+
+            function showJoinModal() {
+                document.getElementById('join-room-modal').classList.remove('hidden');
+            }
+
+            function hideJoinModal() {
+                document.getElementById('join-room-modal').classList.add('hidden');
+            }
+
+            async function joinRoom() {
+                const roomId = document.getElementById('room-id-input').value.trim();
+                if (!roomId) {
+                    alert('Please enter a room ID');
+                    return;
+                }
+
+                try {
+                    await webrtcManager.joinRoom(roomId);
+                    document.getElementById('current-room-id').textContent = roomId;
+                    document.getElementById('create-room-btn').classList.add('hidden');
+                    document.getElementById('join-room-btn').classList.add('hidden');
+                    document.getElementById('leave-room-btn').classList.remove('hidden');
+                    hideJoinModal();
+                    
+                    // Show local video
+                    showLocalVideo();
+                } catch (error) {
+                    console.error('Failed to join room:', error);
+                    alert('Failed to join room. Please check the room ID and your camera permissions.');
+                }
+            }
+
+            function leaveRoom() {
+                webrtcManager.leaveRoom();
+                document.getElementById('current-room-id').textContent = 'Not connected';
+                document.getElementById('create-room-btn').classList.remove('hidden');
+                document.getElementById('join-room-btn').classList.remove('hidden');
+                document.getElementById('leave-room-btn').classList.add('hidden');
+                
+                // Clear video
+                clearVideo();
+            }
+
+            function showLocalVideo() {
+                const localStream = webrtcManager.getLocalStream();
+                if (localStream) {
+                    const videoElement = document.createElement('video');
+                    videoElement.srcObject = localStream;
+                    videoElement.autoplay = true;
+                    videoElement.muted = true;
+                    videoElement.className = 'w-full h-full object-cover';
+                    
+                    const container = document.getElementById('main-video-container');
+                    container.innerHTML = '';
+                    container.appendChild(videoElement);
+                }
+            }
+
+            function addParticipant(userId, stream) {
+                const participantsList = document.getElementById('participants-list');
+                const participantCount = document.getElementById('participant-count');
+                
+                // Create participant element
+                const participantDiv = document.createElement('div');
+                participantDiv.className = 'flex items-center gap-3 p-2 bg-gray-100 dark:bg-gray-700 rounded-lg';
+                participantDiv.id = `participant-${userId}`;
+                
+                const videoElement = document.createElement('video');
+                videoElement.srcObject = stream;
+                videoElement.autoplay = true;
+                videoElement.className = 'w-12 h-12 object-cover rounded-lg';
+                
+                participantDiv.innerHTML = `
+                    <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-lg overflow-hidden">
+                    </div>
+                    <div>
+                        <p class="font-medium text-sm">User ${userId}</p>
+                        <p class="text-xs text-subtle-light dark:text-subtle-dark">Online</p>
+                    </div>
+                `;
+                
+                participantDiv.querySelector('.w-12.h-12').appendChild(videoElement);
+                participantsList.appendChild(participantDiv);
+                
+                // Update count
+                participantCount.textContent = participantsList.children.length;
+            }
+
+            function clearVideo() {
+                document.getElementById('main-video-container').innerHTML = `
+                    <div class="aspect-video bg-gray-800 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                            <p class="text-lg">No video stream</p>
+                            <p class="text-sm opacity-75">Start your camera to begin</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function toggleAudio() {
+                const localStream = webrtcManager.getLocalStream();
+                if (localStream) {
+                    const audioTrack = localStream.getAudioTracks()[0];
+                    if (audioTrack) {
+                        audioTrack.enabled = !audioTrack.enabled;
+                        isAudioMuted = !audioTrack.enabled;
+                        updateAudioButton();
+                    }
+                }
+            }
+
+            function toggleVideo() {
+                const localStream = webrtcManager.getLocalStream();
+                if (localStream) {
+                    const videoTrack = localStream.getVideoTracks()[0];
+                    if (videoTrack) {
+                        videoTrack.enabled = !videoTrack.enabled;
+                        isVideoMuted = !videoTrack.enabled;
+                        updateVideoButton();
+                    }
+                }
+            }
+
+            function updateAudioButton() {
+                const btn = document.getElementById('mute-audio-btn');
+                btn.className = `p-2 ${isAudioMuted ? 'bg-red-500' : 'bg-gray-700'} text-white rounded-lg hover:${isAudioMuted ? 'bg-red-600' : 'bg-gray-600'} transition-colors`;
+            }
+
+            function updateVideoButton() {
+                const btn = document.getElementById('mute-video-btn');
+                btn.className = `p-2 ${isVideoMuted ? 'bg-red-500' : 'bg-gray-700'} text-white rounded-lg hover:${isVideoMuted ? 'bg-red-600' : 'bg-gray-600'} transition-colors`;
+            }
+
+            async function toggleScreenShare() {
+                try {
+                    if (webrtcManager.isScreenSharingActive()) {
+                        webrtcManager.stopScreenShare();
+                        showLocalVideo();
+                    } else {
+                        await webrtcManager.startScreenShare();
+                        showLocalVideo();
+                    }
+                } catch (error) {
+                    console.error('Failed to toggle screen share:', error);
+                }
+            }
+
+            function toggleRecording() {
+                if (isRecording) {
+                    webrtcManager.stopRecording();
+                    isRecording = false;
+                    updateRecordButton();
+                } else {
+                    webrtcManager.startRecording();
+                    isRecording = true;
+                    updateRecordButton();
+                }
+            }
+
+            function updateRecordButton() {
+                const btn = document.getElementById('record-btn');
+                btn.className = `p-2 ${isRecording ? 'bg-red-500' : 'bg-gray-700'} text-white rounded-lg hover:${isRecording ? 'bg-red-600' : 'bg-gray-600'} transition-colors`;
+            }
+
+            function sendMessage() {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                if (!message) return;
+
+                addChatMessage('You', message, true);
+                input.value = '';
+            }
+
+            function addChatMessage(sender, message, isOwn = false) {
+                const chatMessages = document.getElementById('chat-messages');
+                
+                if (chatMessages.children[0]?.textContent === 'No messages yet') {
+                    chatMessages.innerHTML = '';
+                }
+
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex ${isOwn ? 'justify-end' : 'justify-start'}`;
+                
+                messageDiv.innerHTML = `
+                    <div class="max-w-xs ${isOwn ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100'} rounded-lg p-3">
+                        <p class="text-sm font-medium">${sender}</p>
+                        <p class="text-sm">${message}</p>
+                    </div>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
+

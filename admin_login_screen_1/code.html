@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "foreground-light": "#111418",
+              "foreground-dark": "#f6f7f8",
+              "card-light": "#ffffff",
+              "card-dark": "#1b2734",
+              "subtle-light": "#617589",
+              "subtle-dark": "#a0b3c6",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+            },
+            fontFamily: {
+              display: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .form-input::placeholder {
+        color: #a0b3c6;
+      }
+      .dark .form-input::placeholder {
+        color: #617589;
+      }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+    <div class="flex h-screen w-full items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <svg class="mx-auto h-12 w-auto text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                </svg>
+                <h1 class="mt-4 text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">Admin Login</h1>
+            </div>
+            <div class="bg-card-light dark:bg-card-dark shadow-none rounded-none p-8">
+                <form class="space-y-4" id="adminLoginForm">
+                    <div>
+                        <div class="mt-1">
+                            <input class="form-input block w-full rounded-none border-b-2 border-gray-300 dark:border-gray-700 bg-transparent py-3 px-0 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-0 focus:border-primary" id="username" name="username" placeholder="Username" required="" type="text"/>
+                            <div id="username-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mt-1">
+                            <input class="form-input block w-full rounded-none border-b-2 border-gray-300 dark:border-gray-700 bg-transparent py-3 px-0 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-0 focus:border-primary" id="password" name="password" placeholder="Password" required="" type="password"/>
+                            <div id="password-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="mt-6 flex w-full justify-center rounded-full bg-primary px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:cursor-not-allowed" type="submit" id="loginButton">
+                            <span id="loginText">Login</span>
+                            <div id="loginSpinner" class="hidden ml-2">
+                                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+                <div id="loginMessage" class="mt-4 text-center hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin Login Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('adminLoginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginButton = document.getElementById('loginButton');
+            const loginText = document.getElementById('loginText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            const loginMessage = document.getElementById('loginMessage');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            // Theme toggle functionality
+            const themeToggle = document.createElement('button');
+            themeToggle.className = 'absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors';
+            themeToggle.innerHTML = `
+                <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            `;
+            document.body.appendChild(themeToggle);
+
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Clear previous errors
+                usernameError.classList.add('hidden');
+                passwordError.classList.add('hidden');
+                usernameInput.classList.remove('border-red-500');
+                passwordInput.classList.remove('border-red-500');
+
+                // Validate username
+                if (!usernameInput.value.trim()) {
+                    usernameError.textContent = 'Username is required';
+                    usernameError.classList.remove('hidden');
+                    usernameInput.classList.add('border-red-500');
+                    isValid = false;
+                } else if (usernameInput.value.length < 3) {
+                    usernameError.textContent = 'Username must be at least 3 characters';
+                    usernameError.classList.remove('hidden');
+                    usernameInput.classList.add('border-red-500');
+                    isValid = false;
+                }
+
+                // Validate password
+                if (!passwordInput.value.trim()) {
+                    passwordError.textContent = 'Password is required';
+                    passwordError.classList.remove('hidden');
+                    passwordInput.classList.add('border-red-500');
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters';
+                    passwordError.classList.remove('hidden');
+                    passwordInput.classList.add('border-red-500');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // Show loading state
+            function showLoading() {
+                loginButton.disabled = true;
+                loginText.classList.add('hidden');
+                loginSpinner.classList.remove('hidden');
+            }
+
+            // Hide loading state
+            function hideLoading() {
+                loginButton.disabled = false;
+                loginText.classList.remove('hidden');
+                loginSpinner.classList.add('hidden');
+            }
+
+            // Show message
+            function showMessage(message, isError = false) {
+                loginMessage.textContent = message;
+                loginMessage.className = `mt-4 text-center ${isError ? 'text-red-500' : 'text-green-500'}`;
+                loginMessage.classList.remove('hidden');
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    loginMessage.classList.add('hidden');
+                }, 5000);
+            }
+
+            // Simulate admin credentials (in real app, this would be server-side)
+            const adminCredentials = {
+                'admin': 'admin123',
+                'superadmin': 'superadmin123',
+                'manager': 'manager123'
+            };
+
+            // Form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+
+                showLoading();
+
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                // Check credentials
+                if (adminCredentials[username] && adminCredentials[username] === password) {
+                    // Store admin session
+                    localStorage.setItem('adminSession', JSON.stringify({
+                        username: username,
+                        loginTime: new Date().toISOString(),
+                        isAdmin: true
+                    }));
+
+                    showMessage('Login successful! Redirecting...', false);
+                    
+                    // Redirect to admin dashboard after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '../admin_dashboard_1/code.html';
+                    }, 2000);
+                } else {
+                    hideLoading();
+                    showMessage('Invalid username or password', true);
+                }
+            });
+
+            // Real-time validation
+            usernameInput.addEventListener('blur', validateForm);
+            passwordInput.addEventListener('blur', validateForm);
+
+            // Clear errors on input
+            usernameInput.addEventListener('input', function() {
+                usernameError.classList.add('hidden');
+                usernameInput.classList.remove('border-red-500');
+            });
+
+            passwordInput.addEventListener('input', function() {
+                passwordError.classList.add('hidden');
+                passwordInput.classList.remove('border-red-500');
+            });
+
+            // Check if already logged in
+            const adminSession = localStorage.getItem('adminSession');
+            if (adminSession) {
+                try {
+                    const session = JSON.parse(adminSession);
+                    const loginTime = new Date(session.loginTime);
+                    const now = new Date();
+                    const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+                    
+                    // Session expires after 24 hours
+                    if (hoursSinceLogin < 24) {
+                        showMessage('Already logged in. Redirecting...', false);
+                        setTimeout(() => {
+                            window.location.href = '../admin_dashboard_1/code.html';
+                        }, 1000);
+                    } else {
+                        localStorage.removeItem('adminSession');
+                    }
+                } catch (e) {
+                    localStorage.removeItem('adminSession');
+                }
+            }
+
+            // Add back to home button
+            const backButton = document.createElement('button');
+            backButton.className = 'absolute top-4 left-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors';
+            backButton.innerHTML = `
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            `;
+            backButton.addEventListener('click', () => {
+                window.location.href = '../index.html';
+            });
+            document.body.appendChild(backButton);
+        });
+    </script>
+</body>
+</html>

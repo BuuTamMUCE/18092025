@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>EduPath Quiz - Study Mode</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2836",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                        "muted-light": "#6b7280",
+                        "muted-dark": "#9ca3af",
+                        "success-light": "#10b981",
+                        "success-dark": "#10b981",
+                        "error-light": "#ef4444",
+                        "error-dark": "#ef4444"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        :root {
+            --radio-dot-svg: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23ffffff' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+        .split-panel-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: 2rem; /* Space between panels */
+        }
+        .question-panel {
+            /* Styles for the left panel */
+        }
+        .resources-panel {
+            /* Styles for the right panel */
+        }
+        @media (max-width: 768px) { /* Adjust for smaller screens */
+            .split-panel-layout {
+                grid-template-columns: 1fr; /* Stack panels on small screens */
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+    <div class="flex flex-col min-h-screen">
+        <header class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark sticky top-0 z-10">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <div class="text-primary">
+                            <svg class="w-8 h-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
+                        </div>
+                        <h1 class="text-xl font-bold">EduPath</h1>
+                    </div>
+                    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                        <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+                        <a class="text-primary font-bold" href="#">Courses</a>
+                        <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Calendar</a>
+                        <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Messages</a>
+                    </nav>
+                    <div class="flex items-center gap-4">
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                        <div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDfR9bfzAUYxPmytXPiI3FgU7w831U5EU_F0nxgHXG_HqAzsjceQsrdly-vmua_mfGtS6lBVICkbc-qIycp0azWp6p3hd0RVcPRSYK7G55hAIbLZz5QgepOllmwUS_yGg7ub2IA0Lq2reNMPPoapECePCU2uZ-GQEbBKaaviJJliBwRTk_Xu7JTUtIPcyeflV0R3rXQIDTIlpTs8thVDKhBBXcY9bu9qc4TEdD7z0HHv9qHXrEsgY3KQhuJPxAh5tOCLLDdGkvJE1N-");'></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="max-w-5xl mx-auto split-panel-layout">
+                <div class="question-panel">
+                    <div class="mb-8">
+                        <nav class="text-sm font-medium text-muted-light dark:text-muted-dark flex items-center gap-2">
+                            <a class="hover:text-primary transition-colors" href="#">Courses</a>
+                            <span class="material-symbols-outlined text-base">chevron_right</span>
+                            <a class="hover:text-primary transition-colors" href="#">Introduction to Psychology</a>
+                            <span class="material-symbols-outlined text-base">chevron_right</span>
+                            <span class="text-foreground-light dark:text-foreground-dark">Quiz 1 - Study Mode</span>
+                        </nav>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm overflow-hidden mb-6">
+                        <div class="p-6 md:p-8">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                                <h2 class="text-2xl font-bold tracking-tight">Quiz 1: Introduction to Psychology</h2>
+                                <div class="flex items-center gap-4 p-3 rounded-lg bg-background-light dark:bg-background-dark">
+                                    <span class="material-symbols-outlined text-primary">timer</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-2xl font-bold">29</span>
+                                        </div>
+                                        <span class="text-2xl font-bold">:</span>
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-2xl font-bold">55</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-muted-light dark:text-muted-dark">Time Left</span>
+                                </div>
+                            </div>
+                            <div class="border-t border-border-light dark:border-border-dark my-6"></div>
+                            <div>
+                                <p class="text-muted-light dark:text-muted-dark mb-2">Question 1 of 10</p>
+                                <p class="text-lg font-medium mb-6">Which of the following is NOT a major perspective in psychology?</p>
+                                <div class="space-y-4">
+                                    <label class="flex items-center gap-4 p-4 rounded-lg border-2 border-border-light dark:border-border-dark has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all cursor-pointer">
+                                        <input class="h-5 w-5 appearance-none border-2 border-border-light dark:border-border-dark rounded-full checked:bg-primary checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-card-light dark:focus:ring-offset-card-dark" name="psychology_perspective" type="radio"/>
+                                        <span class="text-base font-medium">Behavioral</span>
+                                    </label>
+                                    <label class="flex items-center gap-4 p-4 rounded-lg border-2 border-border-light dark:border-border-dark has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all cursor-pointer">
+                                        <input class="h-5 w-5 appearance-none border-2 border-border-light dark:border-border-dark rounded-full checked:bg-primary checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-card-light dark:focus:ring-offset-card-dark" name="psychology_perspective" type="radio"/>
+                                        <span class="text-base font-medium">Cognitive</span>
+                                    </label>
+                                    <label class="flex items-center gap-4 p-4 rounded-lg border-2 border-border-light dark:border-border-dark has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all cursor-pointer">
+                                        <input class="h-5 w-5 appearance-none border-2 border-border-light dark:border-border-dark rounded-full checked:bg-primary checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-card-light dark:focus:ring-offset-card-dark" name="psychology_perspective" type="radio"/>
+                                        <span class="text-base font-medium">Humanistic</span>
+                                    </label>
+                                    <label class="flex items-center gap-4 p-4 rounded-lg border-2 border-border-light dark:border-border-dark has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all cursor-pointer">
+                                        <input checked="" class="h-5 w-5 appearance-none border-2 border-border-light dark:border-border-dark rounded-full checked:bg-primary checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-card-light dark:focus:ring-offset-card-dark" name="psychology_perspective" type="radio"/>
+                                        <span class="text-base font-medium">Astrological</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-background-light dark:bg-background-dark p-4 md:p-6 flex justify-end border-t border-border-light dark:border-border-dark">
+                            <button class="bg-primary text-white font-bold text-sm h-12 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+                                <span>Next Question</span>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resources-panel">
+                    <div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm overflow-hidden p-6 md:p-8 sticky top-20">
+                        <h3 class="text-lg font-bold tracking-tight mb-4">Study Resources</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-muted-light dark:text-muted-dark mb-2 text-sm">Hint for Question 1</p>
+                                <p class="text-base font-medium">Consider the established schools of thought in psychology that focus on observable behavior and mental processes.</p>
+                            </div>
+                            <div class="border-t border-border-light dark:border-border-dark pt-4">
+                                <p class="text-muted-light dark:text-muted-dark mb-2 text-sm">Relevant Course Material</p>
+                                <a href="#" class="text-primary hover:underline text-base font-medium flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">link</span>
+                                    <span>Chapter 2: Major Perspectives in Psychology</span>
+                                </a>
+                                <a href="#" class="text-primary hover:underline text-base font-medium flex items-center gap-1 mt-2">
+                                    <span class="material-symbols-outlined text-sm">link</span>
+                                    <span>Video: History of Psychology</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

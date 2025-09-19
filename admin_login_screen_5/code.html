@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .form-input::placeholder {
+            color: #a0b3c6;
+        }
+        .dark .form-input::placeholder {
+            color: #617589;
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: -1;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1b2734",
+                        "subtle-light": "#617589",
+                        "subtle-dark": "#a0b3c6",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="font-display">
+
+    <!-- Background Video or Image -->
+    <video autoplay="" class="background-video dark:hidden" loop="" muted playsinline>
+        <source src="https://cdn.pixabay.com/download/vid/2023/01/15/abstract-geometric-background-115974-1080p.mp4" type="video/mp4">
+    </video>
+    <div class="overlay dark:hidden"></div>
+
+    <!-- Dark Mode Background Image -->
+    <div class="hidden dark:block fixed inset-0 w-full h-full bg-cover bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg'); z-index: -1;"></div>
+    <div class="hidden dark:block fixed inset-0 w-full h-full bg-background-dark opacity-80 z-index: -1;"></div>
+
+
+    <div class="relative z-10 flex h-screen w-full items-center justify-center p-4">
+        <div class="w-full max-w-lg">
+            <div class="text-center mb-12">
+                <svg class="mx-auto h-16 w-auto text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                </svg>
+                <h1 class="mt-6 text-4xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">Admin Panel Access</h1>
+                <p class="mt-3 text-lg text-subtle-light dark:text-subtle-dark">Secure your gateway. Please log in to continue.</p>
+            </div>
+            <div class="bg-white/10 dark:bg-black/40 shadow-2xl rounded-2xl p-10 backdrop-blur-sm">
+                <form class="space-y-8">
+                    <div>
+                        <label class="block text-lg font-medium text-foreground-light dark:text-foreground-dark mb-3" for="username">Username</label>
+                        <div class="relative">
+                            <input class="form-input block w-full rounded-xl border-border-light dark:border-border-dark bg-transparent py-4 px-5 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" id="username" name="username" placeholder="Enter your username" required="" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label class="block text-lg font-medium text-foreground-light dark:text-foreground-dark mb-3" for="password">Password</label>
+                            <div class="text-sm">
+                                <a class="font-medium text-primary hover:text-primary/80" href="#">Forgot password?</a>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input class="form-input block w-full rounded-xl border-border-light dark:border-border-dark bg-transparent py-4 px-5 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="flex w-full justify-center rounded-xl bg-primary px-6 py-4 text-lg font-semibold leading-7 text-white shadow-md hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition duration-300 ease-in-out" type="submit">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <p class="mt-10 text-center text-sm text-subtle-light dark:text-subtle-dark">
+              Not an authorized user?
+              <a class="font-semibold leading-6 text-primary hover:text-primary/80" href="#">Return to Public Area</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

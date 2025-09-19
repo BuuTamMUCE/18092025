@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>EduPath Quiz</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2836",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                        "muted-light": "#6b7280",
+                        "muted-dark": "#9ca3af",
+                        "success-light": "#10b981",
+                        "success-dark": "#06d77a",
+                        "danger-light": "#ef4444",
+                        "danger-dark": "#f87171"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        :root {
+            --radio-dot-svg: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23ffffff' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+        .chat-bubble-user {
+            background-color: theme('colors.primary');
+            color: theme('colors.card-light');
+            border-bottom-right-radius: theme('borderRadius.lg');
+        }
+        .chat-bubble-bot {
+            background-color: theme('colors.border-light');
+            color: theme('colors.foreground-light');
+        }
+        .dark .chat-bubble-bot {
+            background-color: theme('colors.border-dark');
+            color: theme('colors.foreground-dark');
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+<div class="flex flex-col min-h-screen">
+    <header class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark sticky top-0 z-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <div class="text-primary">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold">EduPath</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+                    <a class="text-primary font-bold" href="#">Courses</a>
+                    <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Calendar</a>
+                    <a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Messages</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button class="w-10 h-10 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDfR9bfzAUYxPmytXPiI3FgU7w831U5EU_F0nxgHXG_HqAzsjceQsrdly-vmua_mfGtS6lBVICkbc-qIycp0azWp6p3hd0RVcPRSYK7G55hAIbLZz5QgepOllmwUS_yGg7ub2IA0Lq2reNMPPoapECePCU2uZ-GQEbBKaaviJJliBwRTk_Xu7JTUtIPcyeflV0R3rXQIDTIlpTs8thVDKhBBXcY9bu9qc4TEdD7z0HHv9qHXrEsgY3KQhuJPxAh5tOCLLDdGkvJE1N-");'></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="mb-8">
+                <nav class="text-sm font-medium text-muted-light dark:text-muted-dark flex items-center gap-2">
+                    <a class="hover:text-primary transition-colors" href="#">Courses</a>
+                    <span class="material-symbols-outlined text-base">chevron_right</span>
+                    <a class="hover:text-primary transition-colors" href="#">Introduction to Psychology</a>
+                    <span class="material-symbols-outlined text-base">chevron_right</span>
+                    <span class="text-foreground-light dark:text-foreground-dark">Quiz 1</span>
+                </nav>
+            </div>
+
+            <div class="bg-card-light dark:bg-card-dark rounded-xl shadow-lg p-6 md:p-8 min-h-[500px] flex flex-col justify-between">
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                        <h2 class="text-2xl font-bold tracking-tight">Quiz 1: Introduction to Psychology</h2>
+                        <div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-background-dark">
+                            <span class="material-symbols-outlined text-primary">timer</span>
+                            <div class="flex items-baseline gap-1">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-xl font-bold">29</span>
+                                </div>
+                                <span class="text-xl font-bold">:</span>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-xl font-bold">55</span>
+                                </div>
+                            </div>
+                            <span class="text-sm text-muted-light dark:text-muted-dark">Time Left</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="flex-grow overflow-y-auto space-y-4 pr-4" id="chat-container">
+                        <!-- Bot Message 1 -->
+                        <div class="flex items-start gap-3 w-full">
+                            <div class="w-10 h-10 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white">P</div>
+                            <div class="chat-bubble-bot rounded-lg p-4 max-w-[80%] shadow-sm">
+                                <p class="text-muted-light dark:text-muted-dark mb-2">Question 1 of 10</p>
+                                <p class="text-base font-medium mb-4">Which of the following is NOT a major perspective in psychology?</p>
+                                <div class="flex flex-col gap-3">
+                                    <button class="answer-option p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors text-left text-sm font-medium w-full">Behavioral</button>
+                                    <button class="answer-option p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors text-left text-sm font-medium w-full">Cognitive</button>
+                                    <button class="answer-option p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors text-left text-sm font-medium w-full">Humanistic</button>
+                                    <button class="answer-option p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors text-left text-sm font-medium w-full">Astrological</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- User Feedback (initially hidden) -->
+                        <div class="flex items-end gap-3 justify-end hidden" id="feedback-container">
+                            <div class="chat-bubble-user rounded-lg p-3 max-w-[80%] shadow-sm">
+                                <span id="feedback-text"></span>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white">U</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-border-light dark:border-border-dark">
+                    <div class="flex justify-end">
+                        <button id="next-question-button" class="bg-primary text-white font-bold text-sm h-12 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 focus:ring-offset-card-light dark:focus:ring-offset-card-dark disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <span>Next</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const chatContainer = document.getElementById('chat-container');
+    const nextButton = document.getElementById('next-question-button');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const feedbackText = document.getElementById('feedback-text');
+    const answerOptions = document.querySelectorAll('.answer-option');
+
+    // Sample Questions and Answers (replace with actual data)
+    const questions = [
+        {
+            id: 1,
+            text: "Which of the following is NOT a major perspective in psychology?",
+            options: ["Behavioral", "Cognitive", "Humanistic", "Astrological"],
+            correctAnswer: "Astrological",
+            explanation: "Astrology is a pseudoscience and not considered a major psychological perspective. Major perspectives include behavioral, cognitive, psychodynamic, humanistic, biological, and evolutionary."
+        },
+        // Add more questions here
+    ];
+
+    let currentQuestionIndex = 0;
+    let selectedAnswer = null;
+
+    function displayQuestion(question) {
+        const questionBubble = `
+            <div class="flex items-start gap-3 w-full">
+                <div class="w-10 h-10 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white">P</div>
+                <div class="chat-bubble-bot rounded-lg p-4 max-w-[80%] shadow-sm">
+                    <p class="text-muted-light dark:text-muted-dark mb-2">Question ${question.id} of ${questions.length}</p>
+                    <p class="text-base font-medium mb-4">${question.text}</p>
+                    <div class="flex flex-col gap-3">
+                        ${question.options.map((option, index) => `
+                            <button class="answer-option p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors text-left text-sm font-medium w-full" data-option-index="${index}">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        chatContainer.insertAdjacentHTML('beforeend', questionBubble);
+        // Re-query answer options after adding new HTML
+        const currentAnswerOptions = chatContainer.querySelectorAll('.answer-option:not(.disabled)');
+        currentAnswerOptions.forEach(option => option.addEventListener('click', handleAnswerClick));
+    }
+
+    function handleAnswerClick(event) {
+        if (event.target.classList.contains('disabled')) return;
+
+        selectedAnswer = event.target.textContent;
+        const optionIndex = parseInt(event.target.getAttribute('data-option-index'));
+        const currentQuestion = questions[currentQuestionIndex];
+
+        // Disable all answer buttons for the current question
+        answerOptions.forEach(opt => opt.classList.add('disabled', 'opacity-50', 'cursor-not-allowed'));
+        
+        // Check if the answer is correct
+        const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+
+        // Display feedback
+        feedbackText.textContent = `${selectedAnswer} - ${isCorrect ? 'Correct!' : 'Incorrect.'} ${currentQuestion.explanation}`;
+        feedbackText.parentElement.parentElement.classList.remove('hidden');
+        
+        if (isCorrect) {
+            feedbackText.parentElement.classList.add('bg-success-light', 'dark:bg-success-dark', 'text-white');
+        } else {
+            feedbackText.parentElement.classList.add('bg-danger-light', 'dark:bg-danger-dark', 'text-white');
+            // Highlight correct answer if incorrect selection
+            const correctOptionButton = chatContainer.querySelector(`.answer-option[data-option-index="${currentQuestion.options.indexOf(currentQuestion.correctAnswer)}"]`);
+            if (correctOptionButton) {
+                correctOptionButton.classList.add('bg-success-light', 'dark:bg-success-dark', 'text-white', 'border-success-light', 'dark:border-success-dark');
+            }
+        }
+
+        nextButton.disabled = false;
+        nextButton.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
+    }
+
+    function moveToNextQuestion() {
+        // Clear previous question and feedback
+        chatContainer.innerHTML = ''; // Simple clearing, manage history if needed
+        feedbackContainer.classList.add('hidden');
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            displayQuestion(questions[currentQuestionIndex]);
+        } else {
+            // Quiz finished
+            chatContainer.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-center">
+                    <h3 class="text-2xl font-bold mb-4">Quiz Completed!</h3>
+                    <p class="text-muted-light dark:text-muted-dark">You have finished the quiz.</p>
+                    <button id="restart-quiz" class="mt-6 bg-primary text-white font-bold text-sm h-12 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">Restart Quiz</button>
+                </div>
+            `;
+            document.getElementById('restart-quiz').addEventListener('click', restartQuiz);
+            nextButton.style.display = 'none';
+        }
+        nextButton.disabled = true;
+    }
+
+    function restartQuiz() {
+        currentQuestionIndex = 0;
+        chatContainer.innerHTML = ''; // Clear chat
+        feedbackContainer.classList.add('hidden');
+        nextButton.style.display = 'flex'; // Show next button again
+        displayQuestion(questions[currentQuestionIndex]);
+    }
+
+    // Initialize the quiz
+    displayQuestion(questions[currentQuestionIndex]);
+
+    nextButton.addEventListener('click', moveToNextQuestion);
+</script>
+</body>
+</html>

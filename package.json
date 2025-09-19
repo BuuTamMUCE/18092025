@@ -1,0 +1,41 @@
+{
+  "name": "eduplatform-lms",
+  "version": "1.0.0",
+  "description": "EduPlatform - Modern Learning Management System",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "build": "npm run optimize",
+    "optimize": "npm run minify-css && npm run minify-js",
+    "minify-css": "echo 'CSS minification would go here'",
+    "minify-js": "echo 'JS minification would go here'",
+    "deploy": "npm run build && echo 'Deploy to hosting provider'",
+    "test": "echo 'Tests would go here'",
+    "lint": "echo 'Linting would go here'"
+  },
+  "keywords": [
+    "education",
+    "learning",
+    "lms",
+    "online-courses",
+    "quiz",
+    "student-management"
+  ],
+  "author": "EduPlatform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/eduplatform-lms.git"
+  },
+  "homepage": "https://yourdomain.com",
+  "bugs": {
+    "url": "https://github.com/yourusername/eduplatform-lms/issues"
+  }
+}
+
