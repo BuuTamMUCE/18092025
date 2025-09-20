@@ -38,9 +38,9 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <script src="js/config.js"></script>
-    <script src="js/gemini-ai.js"></script>
-    <script src="js/ai-chatbot.js"></script>
+    <script src="../src/scripts/config.js"></script>
+    <script src="../src/scripts/gemini-ai.js"></script>
+    <script src="../src/scripts/ai-chatbot.js"></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -123,7 +123,7 @@
             <div class="mb-12">
                 <h3 class="text-2xl font-bold mb-6 text-center">Admin Dashboard</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('admin_login_screen_1/admin_login_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/login/admin_login_screen_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('admin_dashboard_1/admin_dashboard_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/dashboard/admin_dashboard_4.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('course_management_screen_1/course_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/course/management/course_management_screen_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +159,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('student_management_screen_1/student_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/student_management_screen_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +171,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('quiz_management_screen_1/quiz_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/quiz/management/quiz_management_screen_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +183,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('order_management_screen_1/order_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/order/management/order_management_screen_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@
             <div class="mb-12">
                 <h3 class="text-2xl font-bold mb-6 text-center">Student Portal</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('student_authentication_screens_1/student_authentication_screens_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/authentication/student_authentication_screens_2.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +213,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('my_dashboard_(student)_1/my_dashboard_(student)_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/dashboard/my_dashboard_(student)_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('course_player_interface_1/course_player_interface_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/course/player/course_player_interface_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +238,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('quiz_interface_1/quiz_interface_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/quiz/interface/quiz_interface_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -250,7 +250,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('my_profile_(student)_1/my_profile_(student)_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/profile/my_profile_(student)_1.html')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
