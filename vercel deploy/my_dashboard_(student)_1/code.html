@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EduPath - My Learning</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .progress-bar {
+            width: var(--progress-width, 0%);
+        }
+        /* Hide the tab content by default */
+        .tab-content {
+            display: none;
+        }
+        /* Show the active tab content */
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between">
+<div class="flex items-center gap-4">
+<svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
+<h1 class="text-xl font-bold text-background-dark dark:text-background-light">EduPath</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-background-dark/80 dark:text-background-light/80 hover:text-primary dark:hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-medium text-background-dark/80 dark:text-background-light/80 hover:text-primary dark:hover:text-primary transition-colors" href="#">Catalog</a>
+<a class="text-sm font-bold text-primary" href="#">My Learning</a>
+<a class="text-sm font-medium text-background-dark/80 dark:text-background-light/80 hover:text-primary dark:hover:text-primary transition-colors" href="#">Wishlist</a>
+<a class="text-sm font-medium text-background-dark/80 dark:text-background-light/80 hover:text-primary dark:hover:text-primary transition-colors" href="#">Notifications</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20 text-background-dark/60 dark:text-background-light/60 hover:text-primary dark:hover:text-primary transition-colors">
+<svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+</svg>
+</button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZBLk9LjWMu85Le3c1srCD3e4AlQTo7WXzTxv55b-CwiGTZKR__0pJfIjV0FOAnvVQyTuA5-Tv1HQVuyTenReJIwYtQapXlzO-V_O0nKG0f_8KDiP15H8YK0P0d9ViascOyyqY4KClSmxn12_C7MFf7bnutWyGyNXsSSbs2DhZpPmh7RBLgFiC3ahlSb3ldwlVSfe24EWQhzN-buYN8zjiQtxIo2lxoMpVferMNUjc08aMdwF5etJk10GSlgAf65LZuAPIflN2Sxja");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+<div class="mb-10">
+<h2 class="text-3xl font-bold tracking-tight text-background-dark dark:text-background-light sm:text-4xl">My Learning</h2>
+<p class="mt-2 text-lg text-background-dark/60 dark:text-background-light/60">Continue where you left off, or explore new courses.</p>
+</div>
+
+    <!-- Tabs -->
+    <div class="mb-6">
+        <nav class="flex space-x-4 border-b border-background-dark/10 dark:border-background-light/10" aria-label="Tabs">
+            <button id="in-progress-tab" class="tab-button px-4 py-2 text-sm font-medium rounded-t-lg hover:bg-background-dark/5 dark:hover:bg-background-light/5 focus:outline-none transition-colors duration-200 active" data-tab="in-progress">In Progress</button>
+            <button id="completed-tab" class="tab-button px-4 py-2 text-sm font-medium rounded-t-lg hover:bg-background-dark/5 dark:hover:bg-background-light/5 focus:outline-none transition-colors duration-200" data-tab="completed">Completed</button>
+        </nav>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="in-progress" class="tab-content active">
+        <h3 class="text-2xl font-bold text-background-dark dark:text-background-light mb-6 sr-only">In Progress</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 rounded-lg overflow-hidden group hover:shadow-xl hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-2/5 h-48 sm:h-auto bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGwLYh-zNANjmfsCM5q7eXFgIKxsaa9P8WFi-2OjcGNr3LY4w026gu9cGAzKOtNdFn25u0jAH5uXn8ZYIEvaC8lod2KSO4qDjCBjvEd1HUiSI6YIWdpEID4BzKX9J1mkN-ryYRyOcHUaSQ86lA1xDHk3mk-NiGJdTxjkFYKGEu_8zxpHOmM89CKXHR6PXB7aafQ8AOx_EdylrLzrWXhB4t2cw-vodTO4HDGgKXKysgtA_eIhGjYVZ_odjveasOmWZH8FBkIwiScOqA");'></div>
+                    <div class="p-6 flex flex-col justify-between sm:w-3/5">
+                        <div>
+                            <p class="text-sm font-medium text-primary mb-1">Course</p>
+                            <h4 class="text-lg font-bold text-background-dark dark:text-background-light group-hover:text-primary transition-colors">Advanced Data Analysis with Python</h4>
+                            <p class="text-sm text-background-dark/60 dark:text-background-light/60 mt-1">Dr. Eleanor Vance</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-sm font-medium text-background-dark dark:text-background-light">Progress</p>
+                                <p class="text-sm font-bold text-primary">60%</p>
+                            </div>
+                            <div class="w-full bg-background-dark/10 dark:bg-background-light/10 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-all duration-300 transform group-hover:scale-105">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 rounded-lg overflow-hidden group hover:shadow-xl hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-2/5 h-48 sm:h-auto bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYftUXwZmIHlWLePe6XrSV2o0InrGGm4lhSRqB2LOM6OLooGbSLXEiiCgXDRoUaO4WKrG2WnFXdYS_8xP-G6AjIuBBYyTJrtdCqsv0SogEJ4yXKRB_Z_p22CQsYe7UciO5Bspeu56yGUFZB1TZps7Z-Pe56VIy8hXon0rDHh6o5qyzEauiSmCvqktd4x-BJ9hHcnFCB-APrdBFoeF0tBeLzbEieUxs8oiA-EuPnkN-IKsgRzeDfOlNaTijcXoTMA4OxEW9E5okAyuH");'></div>
+                    <div class="p-6 flex flex-col justify-between sm:w-3/5">
+                        <div>
+                            <p class="text-sm font-medium text-primary mb-1">Course</p>
+                            <h4 class="text-lg font-bold text-background-dark dark:text-background-light group-hover:text-primary transition-colors">Machine Learning Fundamentals</h4>
+                            <p class="text-sm text-background-dark/60 dark:text-background-light/60 mt-1">Prof. Samuel Harper</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-sm font-medium text-background-dark dark:text-background-light">Progress</p>
+                                <p class="text-sm font-bold text-primary">30%</p>
+                            </div>
+                            <div class="w-full bg-background-dark/10 dark:bg-background-light/10 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-all duration-300 transform group-hover:scale-105">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 rounded-lg overflow-hidden group hover:shadow-xl hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-2/5 h-48 sm:h-auto bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzFb4nG_WxGF-vmqQ2RLfwYXIuFI_Rf3Zg4o3KUK3JNAWkyg_DhdpgIBb1VhFpLt2YB_6uwNaBjVZw6ux8OVCsSXibVFUaMRWL9Wm5iYCXPFwdv0z_h0a8d5b8yigeuOgZvVwaHJMk3BWMMLKZruSU8l_v_ZdhLygYpM8w85-Cwq2g_HgcFUAt7Vl2Zq0TOHr9qXKKK67wVJE2PDFFlsMDd6ES5Rqii6OOPaJ1RR1B1PMSNRR2egZHXGnQMrB7SwuaErqCNiRy49N6");'></div>
+                    <div class="p-6 flex flex-col justify-between sm:w-3/5">
+                        <div>
+                            <p class="text-sm font-medium text-primary mb-1">Course</p>
+                            <h4 class="text-lg font-bold text-background-dark dark:text-background-light group-hover:text-primary transition-colors">Deep Learning Specialization</h4>
+                            <p class="text-sm text-background-dark/60 dark:text-background-light/60 mt-1">Dr. Olivia Bennett</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-sm font-medium text-background-dark dark:text-background-light">Progress</p>
+                                <p class="text-sm font-bold text-primary">10%</p>
+                            </div>
+                            <div class="w-full bg-background-dark/10 dark:bg-background-light/10 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 10%"></div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-all duration-300 transform group-hover:scale-105">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="completed" class="tab-content">
+        <h3 class="text-2xl font-bold text-background-dark dark:text-background-light mb-6 sr-only">Completed</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 rounded-lg overflow-hidden group hover:shadow-xl hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-2/5 h-48 sm:h-auto bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDH-uBNythGweyZxEOPSI9GEhvJ_8NxsXqoGimL6tR9mlW0hGZateM8XLmjo2NUsA_6UV7OvjyisfcQeNTPdeUdVKiHoMw9I24vrmoK5cnXRNa2833mCbRxr_roQPOtyk_IfLp7JFOxvyirk8Sjm5MLH5fc4yIlxljWF3IuIDPQF0OXZ1n7EZbrXISccmqwuNYEseXphabCFL-MtetsY6gzbor3vh3BuqH4QssrjgRiMqRrZRMD_O0z_bz4YN4eqv15BwDQrhuzK5Rg");'></div>
+                    <div class="p-6 flex flex-col justify-between sm:w-3/5">
+                        <div>
+                            <p class="text-sm font-medium text-primary mb-1">Course</p>
+                            <h4 class="text-lg font-bold text-background-dark dark:text-background-light group-hover:text-primary transition-colors">Introduction to Data Science</h4>
+                            <p class="text-sm text-background-dark/60 dark:text-background-light/60 mt-1">Dr. Eleanor Vance</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-sm font-medium text-background-dark dark:text-background-light">Completed</p>
+                                <p class="text-sm font-bold text-primary">100%</p>
+                            </div>
+                            <div class="w-full bg-background-dark/10 dark:bg-background-light/10 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary/10 dark:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg hover:bg-primary/20 dark:hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-105">View Certificate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 rounded-lg overflow-hidden group hover:shadow-xl hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-2/5 h-48 sm:h-auto bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCdjEZwhlnSJRU20Wqgw5UBEQLBng6RiYsXEJbiV5vcEILN_mhPRlWJfAo-b0BI7w8fTQFZGTDKf5a1ueGAsucZI8FAPuHDIcK252_0GbnhoGcgZavbOSjuKfCuduW1Vi5nRTN6WVzMQD3JAtTOAxFgAMWOZLTcPD0vOAtYdtQSe6jY36vlx8ARZMhIK0GaC7bAoamOeDJXKZGWjrcXqU25pQtzqRUS4CaX4Yf5qa-6NVaaMz24pjpy85TiIAZPepicGtjCIC9Zo6tF");'></div>
+                    <div class="p-6 flex flex-col justify-between sm:w-3/5">
+                        <div>
+                            <p class="text-sm font-medium text-primary mb-1">Course</p>
+                            <h4 class="text-lg font-bold text-background-dark dark:text-background-light group-hover:text-primary transition-colors">Data Visualization with Tableau</h4>
+                            <p class="text-sm text-background-dark/60 dark:text-background-light/60 mt-1">Prof. Samuel Harper</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-sm font-medium text-background-dark dark:text-background-light">Completed</p>
+                                <p class="text-sm font-bold text-primary">100%</p>
+                            </div>
+                            <div class="w-full bg-background-dark/10 dark:bg-background-light/10 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                            <button class="mt-4 w-full bg-primary/10 dark:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg hover:bg-primary/20 dark:hover:bg-primary/30 transition-all duration-300 transform group-hover:scale-105">View Certificate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</main>
+<footer class="bg-background-light dark:bg-background-dark border-t border-background-dark/10 dark:border-background-light/10">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-background-dark/60 dark:text-background-light/60">© 2024 EduPath. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-sm text-background-dark/60 dark:text-background-light/60 hover:text-primary" href="#">Terms</a>
+<a class="text-sm text-background-dark/60 dark:text-background-light/60 hover:text-primary" href="#">Privacy</a>
+<a class="text-sm text-background-dark/60 dark:text-background-light/60 hover:text-primary" href="#">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to the clicked button and its corresponding content
+                button.classList.add('active');
+                const targetTab = button.getAttribute('data-tab');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Set initial active tab (e.g., "In Progress")
+        document.getElementById('in-progress-tab').classList.add('active');
+        document.getElementById('in-progress').classList.add('active');
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>EduPlatform Command Center</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00bcd4",
+                        "background-light": "#1a202c",
+                        "background-dark": "#0d1117",
+                        "foreground-light": "#e2e8f0",
+                        "foreground-dark": "#1f2937",
+                        "card-light": "#2d3748",
+                        "card-dark": "#1a202c",
+                        "subtle-light": "#90cdf4",
+                        "subtle-dark": "#63b3ed",
+                        "border-light": "#4a5568",
+                        "border-dark": "#374151",
+                        "success-light": "#48bb78",
+                        "success-dark": "#68d391",
+                        "accent": "#ff4081"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    keyframes: {
+                        'pulse-ring': {
+                            '0%': { transform: 'scale(1)', opacity: '1' },
+                            '100%': { transform: 'scale(1.2)', opacity: '0' }
+                        },
+                        'flow': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    },
+                    animation: {
+                        'pulse-ring': 'pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flow': 'flow 8s linear infinite'
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .grid-background {
+            background-image: radial-gradient(circle, rgba(58, 130, 172, 0.1) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+        .graph-line {
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+        .graph-area {
+            opacity: 0.3;
+        }
+        .animate-scanline {
+            animation: scanline 5s linear infinite;
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { transform: translateY(0); opacity: 0.5; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-dark text-foreground-light">
+<div class="flex flex-col min-h-screen">
+    <header class="bg-card-dark border-b border-border-dark shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <div class="text-primary size-6">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-foreground-light">EduPlatform</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium text-subtle-dark hover:text-primary transition-colors relative group" href="#">
+                        Dashboard
+                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
+                    </a>
+                    <a class="text-sm font-medium text-subtle-dark hover:text-primary transition-colors" href="#">Analytics</a>
+                    <a class="text-sm font-medium text-subtle-dark hover:text-primary transition-colors" href="#">Security</a>
+                    <a class="text-sm font-medium text-subtle-dark hover:text-primary transition-colors" href="#">Monitoring</a>
+                    <a class="text-sm font-medium text-subtle-dark hover:text-primary transition-colors" href="#">Settings</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button class="text-subtle-dark hover:text-primary focus:outline-none animate-pulse-ring">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.5 1.5-1.5 1.5H21M15 4h5l-1.5 1.5-1.5 1.5H21m0 4h-5l1.5-1.5 1.5-1.5H21M6 12h5l-1.5 1.5-1.5 1.5H6M6 4h5l-1.5 1.5-1.5 1.5H6" />
+                        </svg>
+                    </button>
+                    <div class="bg-primary rounded-full size-10 flex items-center justify-center text-white font-bold">
+                        SR
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8 grid-background">
+        <div class="mb-8">
+            <h2 class="text-4xl font-extrabold tracking-tight text-foreground-light">Command Center</h2>
+            <p class="text-subtle-dark mt-2 text-lg">Real-time data streams and system overview.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-card-dark p-6 rounded-xl shadow-xl border border-border-dark flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-teal-900 opacity-30 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <p class="text-sm font-medium text-subtle-dark">Active Connections</p>
+                    <p class="text-4xl font-bold text-foreground-light mt-1">5,678</p>
+                </div>
+                <div class="relative z-10 mt-4 flex items-center gap-2">
+                    <div class="animate-pulse-ring rounded-full border border-primary p-2"></div>
+                    <span class="text-xs text-subtle-dark">Streaming live</span>
+                </div>
+            </div>
+            <div class="bg-card-dark p-6 rounded-xl shadow-xl border border-border-dark flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-pink-900 opacity-30 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <p class="text-sm font-medium text-subtle-dark">Processing Load</p>
+                    <p class="text-4xl font-bold text-foreground-light mt-1">78%</p>
+                </div>
+                <div class="relative z-10 mt-4">
+                    <div class="w-full h-2 bg-border-dark rounded-full overflow-hidden">
+                        <div class="h-full bg-accent animate-flow" style="width: 78%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card-dark p-6 rounded-xl shadow-xl border border-border-dark flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-900 to-blue-900 opacity-30 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <p class="text-sm font-medium text-subtle-dark">Alerts Triggered</p>
+                    <p class="text-4xl font-bold text-foreground-light mt-1">12</p>
+                </div>
+                <div class="relative z-10 mt-4 flex items-center gap-2">
+                    <span class="text-xs text-success-light font-semibold">All systems nominal</span>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-card-dark p-6 rounded-xl shadow-xl border border-border-dark flex flex-col">
+                <div class="flex justify-between items-center mb-1">
+                    <h3 class="text-lg font-semibold text-foreground-light">Data Throughput</h3>
+                    <span class="text-xs text-subtle-dark">Last 1 Hour</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-3xl font-bold text-foreground-light">1.2 TB</p>
+                    <p class="text-sm font-medium text-success-light">+8%</p>
+                </div>
+                <div class="flex-grow mt-4 relative">
+                    <svg class="w-full h-full absolute top-0 left-0" fill="none" viewBox="0 0 478 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="throughputGradient" x1="0" x2="0" y1="0" y2="1">
+                                <stop offset="0%" stop-color="#00bcd4" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#00bcd4" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H0V109Z" fill="url(#throughputGradient)" class="graph-area"/>
+                        <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#00bcd4" class="graph-line"/>
+                    </svg>
+                    <div class="absolute inset-0 pointer-events-none animate-scanline">
+                        <div class="h-px w-full bg-primary opacity-50"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card-dark p-6 rounded-xl shadow-xl border border-border-dark flex flex-col">
+                <div class="flex justify-between items-center mb-1">
+                    <h3 class="text-lg font-semibold text-foreground-light">System Health</h3>
+                    <span class="text-xs text-subtle-dark">Real-time Status</span>
+                </div>
+                <div class="flex-grow grid grid-cols-2 gap-4 mt-4">
+                    <div class="flex flex-col items-center justify-center p-3 bg-card-light/5 rounded-lg">
+                        <p class="text-sm font-medium text-subtle-dark">CPU</p>
+                        <p class="text-2xl font-bold text-foreground-light">85%</p>
+                        <div class="w-full h-1.5 bg-border-dark rounded-full mt-1 overflow-hidden">
+                            <div class="h-full bg-accent" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-3 bg-card-light/5 rounded-lg">
+                        <p class="text-sm font-medium text-subtle-dark">Memory</p>
+                        <p class="text-2xl font-bold text-foreground-light">72%</p>
+                        <div class="w-full h-1.5 bg-border-dark rounded-full mt-1 overflow-hidden">
+                            <div class="h-full bg-success-light" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-3 bg-card-light/5 rounded-lg">
+                        <p class="text-sm font-medium text-subtle-dark">Disk I/O</p>
+                        <p class="text-2xl font-bold text-foreground-light">200 MB/s</p>
+                        <div class="w-full h-1.5 bg-border-dark rounded-full mt-1 overflow-hidden">
+                            <div class="h-full bg-primary" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-3 bg-card-light/5 rounded-lg">
+                        <p class="text-sm font-medium text-subtle-dark">Network</p>
+                        <p class="text-2xl font-bold text-foreground-light">5 Gbps</p>
+                        <div class="w-full h-1.5 bg-border-dark rounded-full mt-1 overflow-hidden">
+                            <div class="h-full bg-subtle-dark" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

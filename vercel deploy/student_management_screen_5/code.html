@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link crossorigin="" rel="preconnect" href="https://fonts.gstatic.com/"/>
+<link as="style" rel="stylesheet" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<title>Stitch Design - Mobile First</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex min-h-screen w-full flex-col">
+<header class="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 dark:border-gray-800 px-4 py-3">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-xl"> school </span>
+</div>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">EduPlatform</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400"> notifications </span>
+</button>
+<button class="rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-800">
+<img alt="Admin Avatar" class="h-8 w-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFa1hR-Qv9GrMzyWGNLGdn7nrLtBpl8iKkoS1yBzeOJ6eTBWpIRzqD2o8dB8xW-DBWv5bcVVSUl5tQR3xIpuC-zZwp80jHsC5juOdXCaNWVQHxJsu6VV3B58EwJWS-lVAnX8l2IDG8E3Im_A5WR-GNWPcR3zA6YQ2jRZSfaHQOKP0ikXZmffLh_WxXtfZs-nBTg66xOHMX8HuO3IAC7FdBQ-aqyf7XqMlijHumUJ0Vp5_Jfsu7ZZYJ5HeL976m7LJlyNcaPuMU8aJr"/>
+</button>
+</div>
+</header>
+<main class="flex-1 p-4">
+<div class="mx-auto w-full">
+<div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">Students</h1>
+<button class="flex items-center gap-2 rounded bg-primary px-3 py-2 text-sm font-medium text-white hover:bg-primary/90">
+<span class="material-symbols-outlined"> add </span>
+<span>Add</span>
+</button>
+</div>
+<div class="mb-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"> search </span>
+<input class="w-full rounded border border-gray-200 bg-white py-2 pl-10 pr-3 text-sm text-gray-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-primary" placeholder="Search students..." type="search"/>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-800 dark:bg-background-dark">
+<div class="flex items-center gap-3">
+<img alt="Sophia Clark" class="h-12 w-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkpNGNN1HFKKnwJM71W2mOBT20BX8J3l_AYurLz_NrClKIFu_OfhLLL1U5bpN5GDnsxPKuPl0PvMBa3fF4NDht9X0cXuLwWoMZNTX6Oa7JJ5t7ke8uNJ-hfNI3grNk5EZdv7aOCZ8prTsjpJSzweztwIYI8j-1WTdBpuwklSn06V8khwrrVdohXien0WtIqtvr6LHF05OvDgUpfXUBYNo5Ce5ybKx11Cgi1e3CdX-A-OdrN5e4WOEMSSujFit1ohKfy8TU6rf1p7jd"/>
+<div>
+<span class="text-lg font-semibold text-gray-900 dark:text-white">Sophia Clark</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">sophia.clark@email.com</p>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Created: 2023-08-15</span>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Active</span>
+</div>
+<div class="mt-3 flex items-center justify-end gap-3 pt-3">
+<button class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90">Edit</button>
+<button class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600">Deactivate</button>
+</div>
+</div>
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-800 dark:bg-background-dark">
+<div class="flex items-center gap-3">
+<img alt="Ethan Miller" class="h-12 w-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmJ0yOhnXbJOhyHdqFCP4uYaaM3elr_7hB-whh1-iNt9yfFOxoOKm00Ckz2gVxDyt3BJp5yzJPotUQQnaj-cQuLT3eqZKhe_yQcCYRKnuARM48eWvJuB3h6l-tUE5ak1JWUfl0fdOITXNLbHv48YZzEm1ebHwNOJAOcq8qAF1J7UC6avJtk3N3K8GMlnWH-cbX6vjsWZlIcQ-e03WqJOFQfFf6UQiwpoKnRFfaw9uxp19DvdYGOA6TFcpIZk3DvukOQ_iHltj-l7Lz"/>
+<div>
+<span class="text-lg font-semibold text-gray-900 dark:text-white">Ethan Miller</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">ethan.miller@email.com</p>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Created: 2023-07-20</span>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Active</span>
+</div>
+<div class="mt-3 flex items-center justify-end gap-3 pt-3">
+<button class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90">Edit</button>
+<button class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600">Deactivate</button>
+</div>
+</div>
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-800 dark:bg-background-dark">
+<div class="flex items-center gap-3">
+<img alt="Olivia Davis" class="h-12 w-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhC1YgplB0Of3vT4yybi38u3-yLRwFuD-6BCVPm2sMQjyYRtf5YhFTK_skbwi2nPSfMYJRNd3_LzdOwly4Y3aZfnmZ8vs6WsH9S7ZiD__07nCxKmNjdBwooBEcp3B7d9aKyILgTxDAHW6-AQM_-9V5gB9awnsNjM-_u8SFLwT5xswBCqnM6SnXNbJ8k3HOfXLWVGHC5OodmxCgFsJ1Bj9-zPlYFi5s2fyMaw4P5Ewh3FcU-ZFUi9GE3HcgkTcJvUEh2CLTTdkysO2H"/>
+<div>
+<span class="text-lg font-semibold text-gray-900 dark:text-white">Olivia Davis</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">olivia.davis@email.com</p>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Created: 2023-06-05</span>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Active</span>
+</div>
+<div class="mt-3 flex items-center justify-end gap-3 pt-3">
+<button class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90">Edit</button>
+<button class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600">Deactivate</button>
+</div>
+</div>
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-800 dark:bg-background-dark">
+<div class="flex items-center gap-3">
+<img alt="Liam Wilson" class="h-12 w-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkKa8HJaH743SP3mUAMRzJpssGSgIsmrkgeciIXiq5r1K-dW2V4_rv_GSFnlvvQA5AzSpI5mGuglfAYij8M0XzSy6tfh_WADvwbybpoESmsWlyqfOLf4gWzxe29TY3GBmV14jlnnnnXE7WL4soFHhAjMUhBKHtQmW4TcGOD2U0bs--90BrY-iw4UR2DD8NV4vnskKVrdQBaW1TbIdjtTc8V13cQcRwVXldAdGYPerAenBUemMnVub7ffeqmRx4Nwf8hgHrq-AyVKMx"/>
+<div>
+<span class="text-lg font-semibold text-gray-900 dark:text-white">Liam Wilson</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">liam.wilson@email.com</p>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Created: 2023-05-10</span>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Active</span>
+</div>
+<div class="mt-3 flex items-center justify-end gap-3 pt-3">
+<button class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90">Edit</button>
+<button class="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600">Deactivate</button>
+</div>
+</div>
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-800 dark:bg-background-dark">
+<div class="flex items-center gap-3">
+<img alt="Noah Anderson" class="h-12 w-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCElvMzFjxn03sMc9g-ayPlqMUawYxiP7cdFbucD6K38Ld1VMTbRtXDrbULQlA0H3FgeJAcuUXQs4B5MLjf7YwAbNqbLsb0NZ2ki8SFYf7n8JlGzgC_WS0iA-iFvQuFlxhSjN0gyNKYMSSEijD__OH5blt0_vxtag7g703EcJPJLvTAIArvDN6DyIN4Ut83SX37X6wzS4izQlELKTawLfQvsO9JB1lbGchOShIOOg9DeetBHVPC9n1DLkeEgiCX5sLXl2I9xLNlorui"/>
+<div>
+<span class="text-lg font-semibold text-gray-900 dark:text-white">Noah Anderson</span>
+<p class="text-sm text-gray-500 dark:text-gray-400">noah.anderson@email.com</p>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Created: 2023-03-22</span>
+<span class="inline-flex items-center rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">Locked</span>
+</div>
+<div class="mt-3 flex items-center justify-end gap-3 pt-3">
+<button class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary/90">Edit</button>
+<button class="rounded-md bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600">Activate</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>

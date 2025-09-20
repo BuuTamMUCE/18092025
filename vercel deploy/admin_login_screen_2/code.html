@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin Login - Multi-Step</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "foreground-light": "#111418",
+              "foreground-dark": "#f6f7f8",
+              "card-light": "#ffffff",
+              "card-dark": "#1b2734",
+              "subtle-light": "#617589",
+              "subtle-dark": "#a0b3c6",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+              "google-blue": "#4285F4",
+              "facebook-blue": "#1877F2",
+            },
+            fontFamily: {
+              display: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .form-input::placeholder {
+        color: #a0b3c6;
+      }
+      .dark .form-input::placeholder {
+        color: #617589;
+      }
+      .captcha-container {
+        background-color: #e5e7eb; /* A light grey background for the CAPTCHA */
+        color: #111418;
+        border: 1px solid #d1d5db; /* A subtle border */
+      }
+      .dark .captcha-container {
+        background-color: #1f2937; /* Darker background for dark mode */
+        color: #f6f7f8;
+        border: 1px solid #4b5563; /* Darker border for dark mode */
+      }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+<div class="flex h-screen w-full items-center justify-center p-4">
+<div class="w-full max-w-md">
+<div class="text-center mb-8">
+<svg class="mx-auto h-12 w-auto text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor" alt="Application Logo"/>
+</svg>
+<h1 class="mt-4 text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">Admin Panel Login</h1>
+<p class="mt-2 text-sm text-subtle-light dark:text-subtle-dark">Secure your access with multiple steps.</p>
+</div>
+<div class="bg-card-light dark:bg-card-dark shadow-lg rounded-xl p-8">
+<div id="step1" class="space-y-6">
+    <form id="login-form">
+        <div>
+            <label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="username">Username</label>
+            <div class="mt-2">
+                <input class="form-input block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-3 px-4 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" id="username" name="username" placeholder="Enter your username" required="" type="text"/>
+            </div>
+        </div>
+        <div>
+            <div class="flex items-center justify-between">
+                <label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="password">Password</label>
+                <div class="text-sm">
+                    <a class="font-medium text-primary hover:text-primary/80" href="#">Forgot password?</a>
+                </div>
+            </div>
+            <div class="mt-2">
+                <input class="form-input block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-3 px-4 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+            </div>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <input class="h-4 w-4 rounded border-border-light dark:border-border-dark text-primary focus:ring-primary" id="remember-me" name="remember-me" type="checkbox"/>
+                <label class="ml-3 block text-sm text-foreground-light dark:text-foreground-dark" for="remember-me">Remember me</label>
+            </div>
+            <div>
+                <button class="flex w-full justify-center rounded-lg bg-primary px-4 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" id="continue-button" type="button">Continue</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="relative">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-border-light dark:border-border-dark"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+            <span class="bg-card-light dark:bg-card-dark px-3 font-medium text-subtle-light dark:text-subtle-dark">Or continue with</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+        <button class="inline-flex w-full justify-center rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark px-4 py-2 text-foreground-light dark:text-foreground-dark shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button">
+            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h140.4V312h96.5v128h140.1c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM112 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z" alt="Google Icon"/>
+            </svg>
+            Google
+        </button>
+        <button class="inline-flex w-full justify-center rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark px-4 py-2 text-foreground-light dark:text-foreground-dark shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button">
+            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M279.14 288l-77.71 77.71-31.29-31.29c-5-5-13.17-10.27-21.14-10.27H128v128H32c-17.67 0-32-14.33-32-32V64c0-17.67 14.33-32 32-32h192c17.67 0 32 14.33 32 32v192.29l48.15 48.15c-4.44 6.84-9.93 12.42-16.14 16.86zm-142.72 77.71L272 208.04V384H128v96.29l48.15 48.15c-4.44 6.84-9.93 12.42-16.14 16.86zM304 48c0-17.67-14.33-32-32-32H32C14.33 16 0 30.33 0 48v352c0 17.67 14.33 32 32 32h128V352H64V96h128v224h64V96h64V48z" alt="Facebook Icon"/>
+            </svg>
+            Facebook
+        </button>
+    </div>
+</div>
+
+<div id="step2" class="hidden space-y-6">
+    <div class="captcha-container rounded-lg p-4 text-center">
+        <p class="text-lg font-semibold mb-3">Verify it's you</p>
+        <img src="https://via.placeholder.com/280x100.png?text=CAPTCHA+Image" class="mx-auto mb-3 rounded" alt="CAPTCHA Image Placeholder">
+        <div class="flex items-center justify-center space-x-2">
+            <input class="form-input w-1/2 rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2 px-3 text-foreground-light dark:text-foreground-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" id="captcha-input" placeholder="Enter characters above" type="text"/>
+            <button class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" id="refresh-captcha">Refresh</button>
+        </div>
+    </div>
+    <div>
+        <button class="flex w-full justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" id="verify-button" type="button">Verify and Login</button>
+    </div>
+</div>
+
+</div>
+<p class="mt-8 text-center text-sm text-subtle-light dark:text-subtle-dark">
+    Not an admin?
+    <a class="font-semibold leading-6 text-primary hover:text-primary/80" href="#">Return to homepage</a>
+</p>
+</div>
+</div>
+
+<script>
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const continueButton = document.getElementById('continue-button');
+    const verifyButton = document.getElementById('verify-button');
+    const refreshCaptchaButton = document.getElementById('refresh-captcha');
+
+    continueButton.addEventListener('click', () => {
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
+    });
+
+    verifyButton.addEventListener('click', () => {
+        // Simulate successful verification and login
+        alert('Login successful!');
+        // In a real application, you would redirect the user or submit the form
+        window.location.href = '/dashboard'; // Example redirect
+    });
+
+    refreshCaptchaButton.addEventListener('click', () => {
+        // In a real application, this would fetch a new CAPTCHA
+        alert('Refreshing CAPTCHA...');
+        // Update the src of the image or use a different mechanism
+    });
+</script>
+</body>
+</html>

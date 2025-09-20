@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "content-light": "#1f2937",
+              "content-dark": "#e5e7eb",
+              "secondary-light": "#f3f4f6",
+              "secondary-dark": "#1f2937",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    .dark .dark-mode-toggle-icon {
+        transform: rotate(180deg);
+    }
+</style>
+</head>
+<body class="bg-background-light text-content-light dark:bg-background-dark dark:text-content-dark font-display">
+<div class="flex min-h-screen w-full flex-col">
+<header class="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 px-6 dark:border-gray-800">
+<div class="flex items-center gap-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-xl"> school </span>
+</div>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">EduPlatform</h2>
+</div>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary" href="#">Courses</a>
+<a class="text-sm font-medium text-primary dark:text-primary" href="#">Students</a>
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary" href="#">Instructors</a>
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button id="theme-toggle" class="relative rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 dark-mode-toggle-icon">
+brightness_6
+</span>
+</button>
+<button class="relative rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400"> notifications </span>
+</button>
+<img alt="Admin Avatar" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFa1hR-Qv9GrMzyWGNLGdn7nrLtBpl8iKkoS1yBzeOJ6eTBWpIRzqD2o8dB8xW-DBWv5bcVVSUl5tQR3xIpuC-zZwp80jHsC5juOdXCaNWVQHxJsu6VV3B58EwJWS-lVAnX8l2IDG8E3Im_A5WR-GNWPcR3zA6YQ2jRZSfaHQOKP0ikXZmffLh_WxXtfZs-nBTg66xOHMX8HuO3IAC7FdBQ-aqyf7XqMlijHumUJ0Vp5_Jfsu7ZZYJ5HeL976m7LJlyNcaPuMU8aJr"/>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-8">
+<div class="mx-auto max-w-7xl">
+<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white">Manage Students</h1>
+<button class="flex items-center gap-2 rounded bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90">
+<span class="material-symbols-outlined"> add </span>
+<span>Add Student</span>
+</button>
+</div>
+<div class="mb-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"> search </span>
+<input class="w-full rounded border border-gray-300 bg-white py-2 pl-10 pr-4 text-sm text-gray-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-gray-700 dark:bg-secondary-dark dark:text-content-dark dark:focus:border-primary" placeholder="Search students..." type="search"/>
+</div>
+</div>
+<div class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800">
+<div class="overflow-x-auto">
+<table class="min-w-full table-auto">
+<thead class="bg-secondary-light dark:bg-secondary-dark">
+<tr>
+<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Student</th>
+<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Contact</th>
+<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Creation Date</th>
+<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</th>
+<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200 bg-background-light dark:divide-gray-800 dark:bg-background-dark">
+<tr>
+<td class="whitespace-nowrap px-4 py-4">
+<div class="flex items-center gap-3">
+<img alt="Sophia Clark" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkpNGNN1HFKKnwJM71W2mOBT20BX8J3l_AYurLz_NrClKIFu_OfhLLL1U5bpN5GDnsxPKuPl0PvMBa3fF4NDht9X0cXuLwWoMZNTX6Oa7JJ5t7ke8uNJ-hfNI3grNk5EZdv7aOCZ8prTsjpJSzweztwIYI8j-1WTdBpuwklSn06V8khwrrVdohXien0WtIqtvr6LHF05OvDgUpfXUBYNo5Ce5ybKx11Cgi1e3CdX-A-OdrN5e4WOEMSSujFit1ohKfy8TU6rf1p7jd"/>
+<span class="text-sm font-medium text-content-light dark:text-content-dark">Sophia Clark</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+<div>sophia.clark@email.com</div>
+<div>(555) 123-4567</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">2023-08-15</td>
+<td class="whitespace-nowrap px-4 py-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">Active</span>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary hover:underline" href="#">Edit</a>
+<a class="text-red-600 hover:underline dark:text-red-500" href="#">Deactivate</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4">
+<div class="flex items-center gap-3">
+<img alt="Ethan Miller" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmJ0yOhnXbJOhyHdqFCP4uYaaM3elr_7hB-whh1-iNt9yfFOxoOKm00Ckz2gVxDyt3BJp5yzJPotUQQnaj-cQuLT3eqZKhe_yQcCYRKnuARM48eWvJuB3h6l-tUE5ak1JWUfl0fdOITXNLbHv48YZzEm1ebHwNOJAOcq8qAF1J7UC6avJtk3N3K8GMlnWH-cbX6vjsWZlIcQ-e03WqJOFQfFf6UQiwpoKnRFfaw9uxp19DvdYGOA6TFcpIZk3DvukOQ_iHltj-l7Lz"/>
+<span class="text-sm font-medium text-content-light dark:text-content-dark">Ethan Miller</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+<div>ethan.miller@email.com</div>
+<div>(555) 987-6543</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">2023-07-20</td>
+<td class="whitespace-nowrap px-4 py-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">Active</span>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary hover:underline" href="#">Edit</a>
+<a class="text-red-600 hover:underline dark:text-red-500" href="#">Deactivate</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4">
+<div class="flex items-center gap-3">
+<img alt="Olivia Davis" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhC1YgplB0Of3vT4yybi38u3-yLRwFuD-6BCVPm2sMQjyYRtf5YhFTK_skbwi2nPSfMYJRNd3_LzdOwly4Y3aZfnmZ8vs6WsH9S7ZiD__07nCxKmNjdBwooBEcp3B7d9aKyILgTxDAHW6-AQM_-9V5gB9awnsNjM-_u8SFLwT5xswBCqnM6SnXNbJ8k3HOfXLWVGHC5OodmxCgFsJ1Bj9-zPlYFi5s2fyMaw4P5Ewh3FcU-ZFUi9GE3HcgkTcJvUEh2CLTTdkysO2H"/>
+<span class="text-sm font-medium text-content-light dark:text-content-dark">Olivia Davis</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+<div>olivia.davis@email.com</div>
+<div>(555) 246-8013</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">2023-06-05</td>
+<td class="whitespace-nowrap px-4 py-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">Active</span>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary hover:underline" href="#">Edit</a>
+<a class="text-red-600 hover:underline dark:text-red-500" href="#">Deactivate</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4">
+<div class="flex items-center gap-3">
+<img alt="Liam Wilson" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkKa8HJaH743SP3mUAMRzJpssGSgIsmrkgeciIXiq5r1K-dW2V4_rv_GSFnlvvQA5AzSpI5mGuglfAYij8M0XzSy6tfh_WADvwbybpoESmsWlyqfOLf4gWzxe29TY3GBmV14jlnnnnXE7WL4soFHhAjMUhBKHtQmW4TcGOD2U0bs--90BrY-iw4UR2DD8NV4vnskKVrdQBaW1TbIdjtTc8V13cQcRwVXldAdGYPerAenBUemMnVub7ffeqmRx4Nwf8hgHrq-AyVKMx"/>
+<span class="text-sm font-medium text-content-light dark:text-content-dark">Liam Wilson</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+<div>liam.wilson@email.com</div>
+<div>(555) 369-1215</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">2023-05-10</td>
+<td class="whitespace-nowrap px-4 py-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">Active</span>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary hover:underline" href="#">Edit</a>
+<a class="text-red-600 hover:underline dark:text-red-500" href="#">Deactivate</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-4 py-4">
+<div class="flex items-center gap-3">
+<img alt="Noah Anderson" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCElvMzFjxn03sMc9g-ayPlqMUawYxiP7cdFbucD6K38Ld1VMTbRtXDrbULQlA0H3FgeJAcuUXQs4B5MLjf7YwAbNqbLsb0NZ2ki8SFYf7n8JlGzgC_WS0iA-iFvQuFlxhSjN0gyNKYMSSEijD__OH5blt0_vxtag7g703EcJPJLvTAIArvDN6DyIN4Ut83SX37X6wzS4izQlELKTawLfQvsO9JB1lbGchOShIOOg9DeetBHVPC9n1DLkeEgiCX5sLXl2I9xLNlorui"/>
+<span class="text-sm font-medium text-content-light dark:text-content-dark">Noah Anderson</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+<div>noah.anderson@email.com</div>
+<div>(555) 505-5679</div>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm text-gray-500 dark:text-gray-400">2023-03-22</td>
+<td class="whitespace-nowrap px-4 py-4">
+<span class="inline-flex items-center rounded-full bg-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">Locked</span>
+</td>
+<td class="whitespace-nowrap px-4 py-4 text-sm font-medium">
+<div class="flex items-center gap-4">
+<a class="text-primary hover:underline" href="#">Edit</a>
+<a class="text-green-600 hover:underline dark:text-green-500" href="#">Activate</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    themeToggleBtn.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+    });
+</script>
+
+</body>
+</html>

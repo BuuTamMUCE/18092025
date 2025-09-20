@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EduPath - Course Player (Minimalist)</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="../js/gemini-ai.js"></script>
+    <script src="../js/ai-chatbot.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link crossorigin="" rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1173d4",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+              },
+              fontFamily: {
+                "display": ["Manrope", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <div class="flex h-screen">
+        <!-- Hamburger Menu Button -->
+        <button id="hamburger-btn" class="fixed top-4 left-4 z-50 p-2 rounded-md bg-white/70 dark:bg-background-dark/70 backdrop-blur-sm md:hidden text-gray-600 dark:text-gray-400 hover:bg-primary/10 dark:hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <!-- Sidebar - Initially hidden on mobile, shown via hamburger -->
+        <aside id="sidebar" class="w-80 flex-shrink-0 bg-white dark:bg-background-dark border-r border-gray-200 dark:border-gray-800 flex flex-col fixed md:static inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-300 ease-in-out z-40">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-800">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">Course Content</h2>
+            </div>
+            <nav class="flex-1 overflow-y-auto">
+                <ul class="p-4 space-y-1">
+                    <li>
+                        <details class="group">
+                            <summary class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20">
+                                <span class="font-bold text-gray-900 dark:text-white">Introduction</span>
+                            </summary>
+                        </details>
+                    </li>
+                    <li>
+                        <details class="group" open="">
+                            <summary class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20">
+                                <span class="font-bold text-gray-900 dark:text-white">Chapter 1: Foundations</span>
+                                <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <ul class="pl-4 mt-2 space-y-1">
+                                <li><a class="block p-3 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary font-medium" href="#">Lesson 1.1: Setting Up Your Workspace</a></li>
+                                <li><a class="block p-3 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-700 dark:text-gray-300" href="#">Lesson 1.2: Basic Tools</a></li>
+                                <li><a class="block p-3 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-700 dark:text-gray-300" href="#">Lesson 1.3: Color Theory</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <details class="group">
+                            <summary class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20">
+                                <span class="font-bold text-gray-900 dark:text-white">Chapter 2: Advanced Techniques</span>
+                                <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                        </details>
+                    </li>
+                    <li>
+                        <details class="group">
+                            <summary class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20">
+                                <span class="font-bold text-gray-900 dark:text-white">Chapter 3: Project</span>
+                                <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                        </details>
+                    </li>
+                    <li>
+                        <details class="group">
+                            <summary class="flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20">
+                                <span class="font-bold text-gray-900 dark:text-white">Conclusion</span>
+                            </summary>
+                        </details>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex items-center justify-start px-8 py-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark">
+                <h1 class="text-lg font-bold text-gray-900 dark:text-white">Drawing Fundamentals</h1>
+            </header>
+            <main class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Lesson 1.1: Setting Up Your Workspace</h2>
+                    <div class="aspect-video bg-gray-900 rounded-xl mb-6 relative group">
+                        <img alt="Lesson video thumbnail" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFDqnfS-3orH1p_ZmWp28aJM35i_ATSsP-a4oDs1N2xocUfBzRYPTB6dfpy5TkvPFhvariCJAV0kU4shJJOWyVYAZMW8prGFfrd7C7bQjY9GZaqdVPIUUuUCcYoNDbRQfPgXDVvxwpbFspKNrHpPBtns8htS_QaKXnttqXPGkBIGLPXx7K-tF1AEUm4_xD0it6D99aNVTN5phFWwlEmmPL3zP-ZyI6osy92-EWzM4Y7LVG512FC0obOv7XED5CuncdRl_zTHedCZrc"/>
+                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+                            <button class="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/50 transition-colors">
+                                <span class="material-symbols-outlined text-5xl">play_arrow</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-8">
+                        In this lesson, we'll cover the essentials of setting up your workspace for drawing. We'll discuss the importance of lighting, ergonomics, and organization to create an environment conducive to creativity and productivity.
+                    </p>
+                    <div class="flex justify-end">
+                        <button class="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                            <span>Mark as Complete</span>
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- AI Chatbot Container -->
+    <div id="ai-chatbot-container"></div>
+
+    <script>
+        // Course Player Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const markCompleteBtn = document.querySelector('button[class*="Mark as Complete"]');
+            const playButton = document.querySelector('.group button');
+            const videoThumbnail = document.querySelector('.aspect-video img');
+
+            // Course data structure
+            const courseData = {
+                id: 'drawing-fundamentals',
+                title: 'Drawing Fundamentals',
+                lessons: [
+                    {
+                        id: 'intro',
+                        title: 'Introduction',
+                        completed: false,
+                        duration: '5 min'
+                    },
+                    {
+                        id: 'lesson-1-1',
+                        title: 'Lesson 1.1: Setting Up Your Workspace',
+                        completed: false,
+                        duration: '15 min',
+                        current: true
+                    },
+                    {
+                        id: 'lesson-1-2',
+                        title: 'Lesson 1.2: Basic Tools',
+                        completed: false,
+                        duration: '20 min'
+                    },
+                    {
+                        id: 'lesson-1-3',
+                        title: 'Lesson 1.3: Color Theory',
+                        completed: false,
+                        duration: '25 min'
+                    }
+                ],
+                progress: 0
+            };
+
+            // Load course progress from localStorage
+            const savedProgress = localStorage.getItem(`course-${courseData.id}`);
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                courseData.lessons = progress.lessons || courseData.lessons;
+                courseData.progress = progress.progress || 0;
+                updateUI();
+            }
+
+            // Sidebar toggle functionality
+            hamburgerBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.toggle('translate-x-0');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!sidebar.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+                    if (!sidebar.classList.contains('-translate-x-full')) {
+                        sidebar.classList.add('-translate-x-full');
+                        sidebar.classList.remove('translate-x-0');
+                    }
+                }
+            });
+
+            // Video play functionality
+            if (playButton) {
+                playButton.addEventListener('click', function() {
+                    // Simulate video playing
+                    const videoContainer = this.closest('.aspect-video');
+                    const thumbnail = videoContainer.querySelector('img');
+                    const playOverlay = videoContainer.querySelector('.absolute');
+                    
+                    // Hide thumbnail and show video player
+                    thumbnail.style.display = 'none';
+                    playOverlay.style.display = 'none';
+                    
+                    // Create video element
+                    const video = document.createElement('video');
+                    video.src = 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4';
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.className = 'w-full h-full object-cover rounded-xl';
+                    videoContainer.appendChild(video);
+                    
+                    // Show completion button after video ends
+                    video.addEventListener('ended', function() {
+                        if (markCompleteBtn) {
+                            markCompleteBtn.style.display = 'flex';
+                        }
+                    });
+                });
+            }
+
+            // Mark lesson as complete
+            if (markCompleteBtn) {
+                markCompleteBtn.addEventListener('click', function() {
+                    const currentLesson = courseData.lessons.find(lesson => lesson.current);
+                    if (currentLesson) {
+                        currentLesson.completed = true;
+                        currentLesson.current = false;
+                        
+                        // Move to next lesson
+                        const currentIndex = courseData.lessons.indexOf(currentLesson);
+                        if (currentIndex < courseData.lessons.length - 1) {
+                            courseData.lessons[currentIndex + 1].current = true;
+                        }
+                        
+                        // Update progress
+                        const completedLessons = courseData.lessons.filter(lesson => lesson.completed).length;
+                        courseData.progress = (completedLessons / courseData.lessons.length) * 100;
+                        
+                        // Save progress
+                        localStorage.setItem(`course-${courseData.id}`, JSON.stringify(courseData));
+                        
+                        // Update UI
+                        updateUI();
+                        
+                        // Show success message
+                        showNotification('Lesson completed! Great job!', 'success');
+                        
+                        // Update button text
+                        this.innerHTML = '<span class="material-symbols-outlined">check_circle</span><span>Completed</span>';
+                        this.disabled = true;
+                        this.classList.add('bg-green-500', 'hover:bg-green-500');
+                    }
+                });
+            }
+
+            // Update UI based on course data
+            function updateUI() {
+                // Update lesson list
+                const lessonList = document.querySelector('.space-y-1');
+                if (lessonList) {
+                    lessonList.innerHTML = courseData.lessons.map(lesson => `
+                        <li>
+                            <a class="block p-3 rounded-lg ${lesson.current ? 'bg-primary/10 dark:bg-primary/20 text-primary font-medium' : lesson.completed ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-700 dark:text-gray-300'} flex items-center justify-between" href="#" data-lesson-id="${lesson.id}">
+                                <span>${lesson.title}</span>
+                                <div class="flex items-center gap-2">
+                                    ${lesson.completed ? '<span class="material-symbols-outlined text-sm text-green-500">check_circle</span>' : ''}
+                                    <span class="text-xs text-gray-500">${lesson.duration}</span>
+                                </div>
+                            </a>
+                        </li>
+                    `).join('');
+                    
+                    // Add click handlers for lesson navigation
+                    lessonList.querySelectorAll('a[data-lesson-id]').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const lessonId = this.dataset.lessonId;
+                            loadLesson(lessonId);
+                        });
+                    });
+                }
+            }
+
+            // Load specific lesson
+            function loadLesson(lessonId) {
+                const lesson = courseData.lessons.find(l => l.id === lessonId);
+                if (!lesson) return;
+                
+                // Update current lesson
+                courseData.lessons.forEach(l => l.current = false);
+                lesson.current = true;
+                
+                // Update main content
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.innerHTML = `
+                        <div class="max-w-4xl mx-auto">
+                            <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">${lesson.title}</h2>
+                            <div class="aspect-video bg-gray-900 rounded-xl mb-6 relative group">
+                                <img alt="Lesson video thumbnail" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFDqnfS-3orH1p_ZmWp28aJM35i_ATSsP-a4oDs1N2xocUfBzRYPTB6dfpy5TkvPFhvariCJAV0kU4shJJOWyVYAZMW8prGFfrd7C7bQjY9GZaqdVPIUUuUCcYoNDbRQfPgXDVvxwpbFspKNrHpPBtns8htS_QaKXnttqXPGkBIGLPXx7K-tF1AEUm4_xD0it6D99aNVTN5phFWwlEmmPL3zP-ZyI6osy92-EWzM4Y7LVG512FC0obOv7XED5CuncdRl_zTHedCZrc"/>
+                                <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+                                    <button class="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/50 transition-colors">
+                                        <span class="material-symbols-outlined text-5xl">play_arrow</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-8">
+                                This is the content for ${lesson.title}. Click the play button to start the video lesson.
+                            </p>
+                            <div class="flex justify-end">
+                                <button class="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 ${lesson.completed ? 'bg-green-500 hover:bg-green-500' : ''}" ${lesson.completed ? 'disabled' : ''}>
+                                    <span>${lesson.completed ? 'Completed' : 'Mark as Complete'}</span>
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Re-attach event listeners
+                    const newPlayButton = mainContent.querySelector('.group button');
+                    const newMarkCompleteBtn = mainContent.querySelector('button[class*="Mark as Complete"], button[class*="Completed"]');
+                    
+                    if (newPlayButton) {
+                        newPlayButton.addEventListener('click', function() {
+                            // Video play logic here
+                            showNotification('Video player would start here', 'info');
+                        });
+                    }
+                    
+                    if (newMarkCompleteBtn && !lesson.completed) {
+                        newMarkCompleteBtn.addEventListener('click', function() {
+                            lesson.completed = true;
+                            lesson.current = false;
+                            
+                            const completedLessons = courseData.lessons.filter(l => l.completed).length;
+                            courseData.progress = (completedLessons / courseData.lessons.length) * 100;
+                            
+                            localStorage.setItem(`course-${courseData.id}`, JSON.stringify(courseData));
+                            updateUI();
+                            showNotification('Lesson completed!', 'success');
+                        });
+                    }
+                }
+                
+                // Update UI
+                updateUI();
+            }
+
+            // Show notification
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                    type === 'success' ? 'bg-green-500 text-white' :
+                    type === 'error' ? 'bg-red-500 text-white' :
+                    'bg-blue-500 text-white'
+                }`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            // Theme toggle functionality
+            const themeToggle = document.createElement('button');
+            themeToggle.className = 'fixed top-4 right-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors z-50';
+            themeToggle.innerHTML = `
+                <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            `;
+            document.body.appendChild(themeToggle);
+
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Add back to home button
+            const backButton = document.createElement('button');
+            backButton.className = 'fixed top-4 left-16 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors z-50';
+            backButton.innerHTML = `
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            `;
+            backButton.addEventListener('click', () => {
+                window.location.href = '../index.html';
+            });
+            document.body.appendChild(backButton);
+
+            // Initialize UI
+            updateUI();
+
+            // Initialize AI Chatbot
+            initializeAIChatbot();
+        });
+
+        // Initialize AI Chatbot for Course Player
+        function initializeAIChatbot() {
+            const GEMINI_API_KEY = 'AIzaSyB_Wjc9R8wiuV_AOdxj689QG84CTVNeos4';
+            
+            // Initialize AI Chatbot
+            const chatbot = new AIChatbot('ai-chatbot-container', GEMINI_API_KEY);
+            
+            // Set context for course player
+            chatbot.updateContext({
+                userType: 'student',
+                currentPage: 'course-player',
+                currentCourse: 'Drawing Fundamentals',
+                currentLesson: 'Lesson 1.1: Setting Up Your Workspace',
+                platform: 'EduPlatform'
+            });
+
+            // Add AI study assistance features
+            addAIStudyFeatures();
+        }
+
+        // Add AI study assistance features
+        function addAIStudyFeatures() {
+            // Add AI study tips button
+            addAIStudyTipsButton();
+            
+            // Add AI quiz help
+            addAIQuizHelp();
+            
+            // Add AI content summarization
+            addAIContentSummary();
+        }
+
+        // Add AI study tips button
+        function addAIStudyTipsButton() {
+            const mainContent = document.querySelector('main');
+            if (mainContent) {
+                const aiButton = document.createElement('button');
+                aiButton.className = 'fixed bottom-20 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 z-40';
+                aiButton.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                    <span>AI Study Tips</span>
+                `;
+                
+                aiButton.addEventListener('click', async () => {
+                    const chatbot = window.chatbot;
+                    if (chatbot) {
+                        chatbot.toggleChat();
+                        setTimeout(() => {
+                            document.getElementById('ai-chat-input').value = 'Give me study tips for this lesson';
+                            chatbot.sendMessage();
+                        }, 300);
+                    }
+                });
+                
+                mainContent.appendChild(aiButton);
+            }
+        }
+
+        // Add AI quiz help
+        function addAIQuizHelp() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar) {
+                const quizHelpButton = document.createElement('div');
+                quizHelpButton.className = 'p-4 border-t border-gray-200 dark:border-gray-700';
+                quizHelpButton.innerHTML = `
+                    <button id="ai-quiz-help" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>AI Quiz Help</span>
+                    </button>
+                `;
+                
+                sidebar.appendChild(quizHelpButton);
+                
+                document.getElementById('ai-quiz-help').addEventListener('click', () => {
+                    const chatbot = window.chatbot;
+                    if (chatbot) {
+                        chatbot.toggleChat();
+                        setTimeout(() => {
+                            document.getElementById('ai-chat-input').value = 'Help me prepare for the quiz on this topic';
+                            chatbot.sendMessage();
+                        }, 300);
+                    }
+                });
+            }
+        }
+
+        // Add AI content summary
+        function addAIContentSummary() {
+            const mainContent = document.querySelector('main');
+            if (mainContent) {
+                const summaryButton = document.createElement('button');
+                summaryButton.className = 'fixed bottom-32 right-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 z-40';
+                summaryButton.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>AI Summary</span>
+                `;
+                
+                summaryButton.addEventListener('click', async () => {
+                    const content = document.querySelector('main p').textContent;
+                    const chatbot = window.chatbot;
+                    if (chatbot) {
+                        chatbot.toggleChat();
+                        setTimeout(() => {
+                            document.getElementById('ai-chat-input').value = `Summarize this lesson content: ${content}`;
+                            chatbot.sendMessage();
+                        }, 300);
+                    }
+                });
+                
+                mainContent.appendChild(summaryButton);
+            }
+        }
+    </script>
+</body>
+</html>

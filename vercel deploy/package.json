@@ -1,0 +1,47 @@
+{
+  "name": "eduplatform-lms",
+  "version": "1.0.0",
+  "description": "EduPlatform - Modern Learning Management System",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o",
+    "start": "npx http-server . -p 3000 -o",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": [
+    "education",
+    "learning",
+    "lms",
+    "online-courses",
+    "quiz",
+    "student-management",
+    "vercel",
+    "static-site"
+  ],
+  "author": "EduPlatform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/eduplatform-lms.git"
+  },
+  "homepage": "https://yourdomain.vercel.app",
+  "bugs": {
+    "url": "https://github.com/yourusername/eduplatform-lms/issues"
+  },
+  "vercel": {
+    "framework": null,
+    "buildCommand": null,
+    "outputDirectory": ".",
+    "installCommand": null,
+    "devCommand": "npx http-server . -p 3000 -o"
+  }
+}
