@@ -77,6 +77,13 @@ class NavigationManager {
             url += `?${queryString}`;
         }
 
+        // Add language parameter if available
+        if (window.i18n && window.i18n.getCurrentLanguage()) {
+            const currentLang = window.i18n.getCurrentLanguage();
+            const separator = url.includes('?') ? '&' : '?';
+            url += `${separator}lang=${currentLang}`;
+        }
+
         // Show loading animation
         this.showLoading();
         
