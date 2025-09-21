@@ -39,6 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <script src="../src/scripts/config.js"></script>
+    <script src="../src/scripts/navigation.js"></script>
     <script src="../src/scripts/gemini-ai.js"></script>
     <script src="../src/scripts/ai-chatbot.js"></script>
     <script>
@@ -97,6 +98,18 @@
                         <h1 class="text-xl font-bold">EduPlatform</h1>
                     </div>
                     <div class="flex items-center gap-4">
+                        <!-- Navigation Menu -->
+                        <div class="relative">
+                            <button id="nav-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                            <div id="nav-dropdown" class="absolute right-0 top-full mt-2 w-64 bg-card-light dark:bg-card-dark rounded-lg shadow-lg border border-border-light dark:border-border-dark hidden z-50">
+                                <div id="navigation-menu" class="p-4"></div>
+                            </div>
+                        </div>
+                        
                         <button id="theme-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
                             <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -123,7 +136,7 @@
             <div class="mb-12">
                 <h3 class="text-2xl font-bold mb-6 text-center">Admin Dashboard</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/login/admin_login_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('adminLogin')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,7 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/dashboard/admin_dashboard_4.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('adminDashboard')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/course/management/course_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('courseManagement')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +172,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/admin/student_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('adminStudentManagement')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +184,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/quiz/management/quiz_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('quizManagement')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +196,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/order/management/order_management_screen_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('orderManagement')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +214,7 @@
             <div class="mb-12">
                 <h3 class="text-2xl font-bold mb-6 text-center">Student Portal</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/authentication/student_authentication_screens_2.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('studentLogin')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +226,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/dashboard/my_dashboard_(student)_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('studentDashboard')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/course/player/course_player_interface_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('coursePlayer')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +251,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/quiz/interface/quiz_interface_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('quizInterface')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -250,7 +263,7 @@
                         </div>
                     </div>
 
-                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('../src/pages/student/profile/my_profile_(student)_1.html')">
+                    <div class="card-hover bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('studentProfile')">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -278,7 +291,7 @@
                     <p class="text-sm text-subtle-light dark:text-subtle-dark">Optimized for speed and efficiency</p>
                 </div>
 
-                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigateTo('ai-dashboard.html')">
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark cursor-pointer" onclick="navigationManager.navigateTo('aiDashboard')">
                     <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
@@ -340,10 +353,30 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // Navigation function
+        // Navigation function (legacy support)
         function navigateTo(url) {
             window.location.href = url;
         }
+
+        // Navigation menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navDropdown = document.getElementById('nav-dropdown');
+            
+            if (navToggle && navDropdown) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navToggle.contains(e.target) && !navDropdown.contains(e.target)) {
+                        navDropdown.classList.add('hidden');
+                    }
+                });
+            }
+        });
 
         // Add loading animation
         function showLoading() {
