@@ -44,7 +44,16 @@
       ]
     },
     {
-      "source": "/src/assets/(.*)",
+      "source": "/scripts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -61,18 +70,33 @@
     },
     {
       "source": "/admin",
-      "destination": "/src/pages/admin/login/admin_login_screen_1.html",
+      "destination": "/admin-login.html",
       "permanent": false
     },
     {
       "source": "/student",
-      "destination": "/src/pages/student/authentication/student_authentication_screens_2.html",
+      "destination": "/student-login.html",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/admin-dashboard.html",
+      "permanent": false
+    },
+    {
+      "source": "/courses",
+      "destination": "/course-management.html",
+      "permanent": false
+    },
+    {
+      "source": "/quiz",
+      "destination": "/quiz-interface.html",
       "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!src/|public/).*)",
+      "source": "/((?!public/).*)",
       "destination": "/public/index.html"
     }
   ],

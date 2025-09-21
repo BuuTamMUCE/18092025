@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management - EduPlatform</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="./scripts/config.js"></script>
+    <script src="./scripts/navigation.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111418",
+                        "foreground-dark": "#f6f7f8",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1b2734",
+                        "subtle-light": "#617589",
+                        "subtle-dark": "#a0b3c6",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-sans bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+    <!-- Navigation Header -->
+    <header class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <div class="text-primary size-6">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold">
+                        <a href="/" onclick="navigationManager.navigateTo('home')" class="hover:text-primary transition-colors">
+                            EduPlatform
+                        </a>
+                    </h1>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <button id="nav-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        <div id="nav-dropdown" class="absolute right-0 top-full mt-2 w-64 bg-card-light dark:bg-card-dark rounded-lg shadow-lg border border-border-light dark:border-border-dark hidden z-50">
+                            <div class="p-4">
+                                <div id="navigation-menu"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-card-light dark:bg-card-dark p-8 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-2">Course Management</h1>
+                    <p class="text-subtle-light dark:text-subtle-dark">course management functionality coming soon</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="inline-flex items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        This page is under development
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Navigation menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navDropdown = document.getElementById('nav-dropdown');
+            
+            if (navToggle && navDropdown) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navDropdown.classList.toggle('hidden');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!navToggle.contains(e.target) && !navDropdown.contains(e.target)) {
+                        navDropdown.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Set user role
+            if (typeof navigationManager !== 'undefined') {
+                navigationManager.setUserRole('admin');
+            }
+        });
+    </script>
+</body>
+</html>
