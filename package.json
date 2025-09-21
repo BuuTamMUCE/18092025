@@ -55,7 +55,7 @@
     "http-server": "^14.1.1",
     "vercel": "^32.0.0",
     "rimraf": "^5.0.0",
-    "lighthouse": "^11.0.0",
+    "lighthouse": "^12.8.2",
     "web-vitals": "^3.0.0"
   },
   "dependencies": {
