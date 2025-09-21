@@ -24,7 +24,16 @@
     "reinstall": "npm run clean && npm install",
     "test:api": "node scripts/test-api.js",
     "test:performance": "node scripts/test-performance.js",
-    "monitor": "vercel logs --follow"
+    "monitor": "vercel logs --follow",
+    "local-checks": "node scripts/local-checks.js",
+    "smoke-tests": "node scripts/smoke-tests.js",
+    "api-health": "node scripts/api-health-check.js",
+    "lighthouse": "npx @lhci/cli autorun",
+    "playwright": "npx playwright test",
+    "workflow": "node scripts/automated-workflow.js",
+    "lint": "echo 'Linting would go here'",
+    "format": "echo 'Formatting would go here'",
+    "test": "echo 'Tests would go here'"
   },
   "keywords": [
     "education",
