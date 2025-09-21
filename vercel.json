@@ -1,13 +1,33 @@
 {
   "version": 2,
   "name": "eduplatform-lms",
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
+  "framework": null,
   "builds": [
     {
       "src": "public/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "edge/**/*.js",
+      "use": "@vercel/edge"
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/edge/(.*)",
+      "dest": "/edge/$1"
+    },
     {
       "src": "/",
       "dest": "/public/index.html"
@@ -40,6 +60,10 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
         }
       ]
     },
@@ -49,11 +73,24 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "unsafe-none"
         }
       ]
     },
     {
       "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
       "headers": [
         {
           "key": "Cache-Control",
@@ -96,13 +133,38 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!public/).*)",
+      "source": "/((?!api/|edge/|public/).*)",
       "destination": "/public/index.html"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
+  "functions": {
+    "api/auth.js": {
+      "maxDuration": 30
+    },
+    "api/analytics.js": {
+      "maxDuration": 10
+    },
+    "edge/geo.js": {
+      "runtime": "edge"
+    }
   },
-  "regions": ["sin1", "hkg1", "nrt1"],
-  "framework": null
+  "env": {
+    "NODE_ENV": "production",
+    "VERCEL_ENV": "production"
+  },
+  "regions": ["sin1", "hkg1", "nrt1", "iad1", "lhr1"],
+  "crons": [
+    {
+      "path": "/api/cleanup",
+      "schedule": "0 2 * * *"
+    }
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "github": {
+    "silent": true
+  }
 }

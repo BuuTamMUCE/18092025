@@ -1,16 +1,30 @@
 {
   "name": "eduplatform-lms",
   "version": "2.0.0",
-  "description": "EduPlatform - Modern Learning Management System with Organized Structure",
+  "description": "EduPlatform - Modern Learning Management System with Vercel Integration",
   "main": "public/index.html",
   "scripts": {
     "dev": "npx http-server public -p 3000 -o",
     "start": "npx http-server public -p 3000 -o",
-    "build": "echo 'Static site - no build required'",
-    "deploy": "vercel --prod",
+    "build": "npm run optimize && npm run generate-sitemap && npm run validate",
+    "optimize": "npm run minify-assets && npm run compress-images",
+    "minify-assets": "echo 'Asset minification would go here'",
+    "compress-images": "echo 'Image compression would go here'",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "validate": "node scripts/validate-deployment.js",
+    "deploy": "npm run build && vercel --prod",
+    "deploy:preview": "npm run build && vercel",
+    "deploy:production": "npm run build && vercel --prod --confirm",
     "preview": "vercel",
-    "clean": "rimraf node_modules package-lock.json",
-    "reinstall": "npm run clean && npm install"
+    "analytics": "vercel analytics",
+    "logs": "vercel logs",
+    "domains": "vercel domains",
+    "env": "vercel env",
+    "clean": "rimraf node_modules package-lock.json .vercel",
+    "reinstall": "npm run clean && npm install",
+    "test:api": "node scripts/test-api.js",
+    "test:performance": "node scripts/test-performance.js",
+    "monitor": "vercel logs --follow"
   },
   "keywords": [
     "education",
@@ -20,15 +34,24 @@
     "quiz",
     "student-management",
     "vercel",
-    "static-site",
-    "organized-structure"
+    "edge-functions",
+    "serverless",
+    "analytics",
+    "performance",
+    "modern-web"
   ],
   "author": "EduPlatform Team",
   "license": "MIT",
   "devDependencies": {
     "http-server": "^14.1.1",
     "vercel": "^32.0.0",
-    "rimraf": "^5.0.0"
+    "rimraf": "^5.0.0",
+    "lighthouse": "^11.0.0",
+    "web-vitals": "^3.0.0"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.0.0",
+    "@vercel/speed-insights": "^1.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -37,15 +60,15 @@
     "type": "git",
     "url": "https://github.com/yourusername/eduplatform-lms.git"
   },
-  "homepage": "https://yourdomain.vercel.app",
+  "homepage": "https://eduplatform-lms.vercel.app",
   "bugs": {
     "url": "https://github.com/yourusername/eduplatform-lms/issues"
   },
   "vercel": {
     "framework": null,
-    "buildCommand": null,
+    "buildCommand": "npm run build",
     "outputDirectory": "public",
-    "installCommand": null,
-    "devCommand": "npx http-server public -p 3000 -o"
+    "installCommand": "npm install",
+    "devCommand": "npm run dev"
   }
 }
